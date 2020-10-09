@@ -1,11 +1,18 @@
 
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import beans.WeatherData;
+import business.GenerateWeatherData;
+import java.sql.*;
 
 /**
  * Servlet implementation class HelloWorldTest
@@ -22,6 +29,43 @@ public class HelloWorldTest extends HttpServlet {
         // TODO Auto-generated constructor stub
         //This is a test.
         //Hello!
+        
+        List<WeatherData> data = new ArrayList<WeatherData>();
+        GenerateWeatherData generate = new GenerateWeatherData();
+        for(int i = 0; i < 7; i++)
+        {
+        	data = generate.generateData(data);
+        }
+        generate.setDays(data);
+        System.lineSeparator();
+        
+        for(int i = 0; i < data.size(); i++)
+        {
+        	System.out.println("Location: " + data.get(i).getLocation() + " - Description: " + data.get(i).getDescription() + " - Temperature: " + data.get(i).getTemperature()
+          + " - Humidity: " + data.get(i).getHumidity() + " - Wind Speed: " + data.get(i).getWindSpeed() + " - Weekday: " + data.get(i).getWeekDay());
+        }
+        
+        try
+        {
+        	Connection myConn = DriverManager.getConnection("jdbc:mysql://localhost:3306/sys", "root", "connection");
+        	Statement myStmt = myConn.createStatement();
+        	
+        	//SAMPLE INSERT STATEMENT AND EXECUTION
+        	String sql = "INSERT INTO user (username, password) VALUES('Joan', 'Connor')";
+        	PreparedStatement prep = myConn.prepareStatement(sql);
+        	prep.executeUpdate();
+        	
+        	//SAMPLE RETRIEVAL STATEMENT AND RESULTSET
+        	ResultSet rs = myStmt.executeQuery("select * from user");
+        	while(rs.next())
+        	{
+        		System.out.println("Username: " + rs.getString("username") + " Password: " + rs.getString("password"));
+        	}
+        }
+        catch(Exception e)
+        {
+        	e.printStackTrace();
+        }
     }
 
 	/**
