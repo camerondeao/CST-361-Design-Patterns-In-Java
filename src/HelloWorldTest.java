@@ -29,6 +29,7 @@ public class HelloWorldTest extends HttpServlet {
         // TODO Auto-generated constructor stub
         //This is a test.
         //Hello!
+<<<<<<< HEAD
         
         List<WeatherData> data = new ArrayList<WeatherData>();
         GenerateWeatherData generate = new GenerateWeatherData();
@@ -66,6 +67,9 @@ public class HelloWorldTest extends HttpServlet {
         {
         	e.printStackTrace();
         }
+=======
+        //testing from david
+>>>>>>> 6336517fab001b8a38b9c2b920b8c745716ff95d
     }
 
 	/**
