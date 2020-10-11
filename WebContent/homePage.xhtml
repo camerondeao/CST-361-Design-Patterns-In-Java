@@ -1,0 +1,83 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:pt="http://xmlns.jcp.org/jsf/passthrough">
+      
+<h:head>
+	<link rel="stylesheet" type="text/css" href="resources/style.css"/>
+	<script src="https://kit.fontawesome.com/41b7117e12.js" crossorigin="anonymous"></script>
+	<title>Weather Tracker | Home</title>
+</h:head> 
+
+<body>
+  <div class="container">
+    <h1 class="logo"><a href="#">Weather Tracker</a></h1>
+    <nav>
+      <ul class="navigation">
+        <li><a href="loginForm.xhtml">Login</a></li>
+        <li><a href="registerForm.xhtml">Sign Up</a></li>
+      </ul>
+    </nav>
+  </div>
+
+
+<div class="login-page">
+<p class="message"><a href="visualReport.xhtml">Visual Report</a></p>
+	<div class="form">
+		<div class="login-form">
+				<h3  style="text-align:left">Texas</h3>
+				<h1 style="text-align:left;float:left;">Frisco</h1> 
+				<h3 style="text-align:right;float:right;">Tuesday</h3> 
+				<div class="line"></div>
+				<p style="text-align: center;margin-top:65px; font-size:85px"><i class="fas fa-cloud" style="margin-right:10px"></i>66°</p>
+				<p style="text-align: center;margin-top:5px; font-size:45px">Cloudy</p>
+				<div id="box">
+				<p style="float: left; margin: 20px 10px 0px 10px;font-size:15px">Wind <strong>SE 5 mph</strong></p>
+				</div>
+				<div id="box">
+				<p style="float: right; margin: 20px 10px 0px 10px;font-size:15px">Humidity <strong>88%</strong></p>
+				</div>
+		</div>
+	</div>
+	<div class="form" style="margin-top:-85px">
+		<!-- WeatherData -->
+		<!-- weekday -->
+		<h:dataTable value="#{album.tracks}" var="track" style="text-align:center">
+				<h:column>
+					<f:facet name="header">Wednesday</f:facet>
+					<!-- icon -->
+					<!-- temp -->
+				</h:column>
+				<h:column>
+					<f:facet name="header">Thursday</f:facet>
+					<!-- icon -->
+					<!-- temp -->
+				</h:column>
+				<h:column>
+					<f:facet name="header">Friday</f:facet>
+					<!-- icon -->
+					<!-- temp -->
+				</h:column>
+				<h:column>
+					<f:facet name="header">Saturday</f:facet>
+					<!-- icon -->
+					<!-- temp -->
+				</h:column>
+				<h:column>
+					<f:facet name="header">Sunday</f:facet>
+					<!-- icon -->
+					<!-- temp -->
+				</h:column>
+				<h:column>
+					<f:facet name="header">Monday</f:facet>
+					<!-- icon -->
+					<!-- temp -->
+				</h:column>
+		</h:dataTable>
+	</div>
+</div> 
+</body> 
+
+</html>

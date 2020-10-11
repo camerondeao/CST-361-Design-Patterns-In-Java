@@ -1,0 +1,49 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:pt="http://xmlns.jcp.org/jsf/passthrough">
+<h:head>
+	<link rel="stylesheet" type="text/css" href="resources/style.css"/>
+	<title>Weather Tracker | Sign Up</title>
+</h:head>
+<body>
+  <div class="container">
+    <h1 class="logo"><a href="#">Weather Tracker</a></h1>
+    <nav>
+      <ul class="navigation">
+        <li><a href="loginForm.xhtml">Login</a></li>
+        <li><a href="registerForm.xhtml">Sign Up</a></li>
+      </ul>
+    </nav>
+  </div>
+  
+  <div class="login-page">
+	<div class="form">
+	    <h:form class="login-form">
+	    <div id="box" style="float:left;width:48%">
+		<h:inputText id="firstName" value="#{user.firstName}" title="" pt:placeholder="First Name" styleClass="input-short"/><h:message for="firstName"/><br/>
+		</div>
+		<div id="box" style="float:right; width:48%">
+		<h:inputText id="lastName" value="#{user.lastName}" title="" pt:placeholder="Last Name" styleClass="input-short"/><h:message for="lastName"/><br/>
+		</div>
+		<h:inputText id="email" value="#{user.email}" title="" pt:placeholder="Email Address" styleClass="input"/><h:message for="email"/><br/>
+		<h:inputText id="gender" value="#{user.gender}" title="" pt:placeholder="Gender" styleClass="input"/><h:message for="gender"/><br/>
+		<div id="box" style="float:left;width:48%">
+		<h:inputText id="age" value="#{user.age}" title="" pt:placeholder="Age" styleClass="input-short"/><h:message for="age"/><br/>
+		</div>
+		<div id="box" style="float:right;width:48%">
+		<h:inputText id="state" value="#{user.state}" title="" pt:placeholder="State" styleClass="input-short"/><h:message for="state"/><br/>
+		</div>
+		<h:inputText id="username" value="#{user.username}" title="" pt:placeholder="Username" styleClass="input"/><h:message for="username"/><br/>
+		<h:inputText id="password" value="#{user.password}" title="" pt:placeholder="Password" styleClass="input"/><h:message for="password"/><br/>
+
+		<h:commandButton value="Sign Up" action="#{registerController.onSubmit(user)}" styleClass="button" />
+		<p class="message">Already have an account? <a href="loginForm.xhtml">Sign In</a></p>
+		</h:form>
+    </div>
+  </div>
+    
+</body>
+</html>
