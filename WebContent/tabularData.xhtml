@@ -1,0 +1,36 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html"> 
+
+<h:head>
+	<title>Add Album Response</title>
+</h:head> 
+
+<body> 
+	<div align="center">
+
+		<h:form align="center">
+			
+			<td><h2>Tabular Data</h2></td>
+			<h:dataTable value="#{WeatherData}" var="WeatherData"
+              style="text-align: center">
+				
+				<h:column>
+					<f:facet name="header">Location</f:facet>
+					
+                  #{WeatherData.location}
+                  
+                </h:column>
+                 
+				
+                  
+			</h:dataTable>
+		</h:form>
+	</div>
+</body> 
+
+</html>
