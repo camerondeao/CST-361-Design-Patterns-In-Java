@@ -45,27 +45,27 @@ public class HelloWorldTest extends HttpServlet {
           + " - Humidity: " + data.get(i).getHumidity() + " - Wind Speed: " + data.get(i).getWindSpeed() + " - Weekday: " + data.get(i).getWeekDay());
         }
         
-        try
-        {
-        	Connection myConn = DriverManager.getConnection("jdbc:mysql://localhost:3306/sys", "root", "connection");
-        	Statement myStmt = myConn.createStatement();
-        	
-        	//SAMPLE INSERT STATEMENT AND EXECUTION
-//        	String sql = "INSERT INTO user (username, password) VALUES('Joan', 'Connor')";
-//        	PreparedStatement prep = myConn.prepareStatement(sql);
-//        	prep.executeUpdate();
-        	
-        	//SAMPLE RETRIEVAL STATEMENT AND RESULTSET
-        	ResultSet rs = myStmt.executeQuery("select * from user");
-        	while(rs.next())
-        	{
-        		System.out.println("Username: " + rs.getString("username") + " Password: " + rs.getString("password"));
-        	}
-        }
-        catch(Exception e)
-        {
-        	e.printStackTrace();
-        }
+//        try
+//        {
+//        	Connection myConn = DriverManager.getConnection("jdbc:mysql://localhost:3306/sys", "root", "connection");
+//        	Statement myStmt = myConn.createStatement();
+//        	
+//        	//SAMPLE INSERT STATEMENT AND EXECUTION
+////        	String sql = "INSERT INTO user (username, password) VALUES('Joan', 'Connor')";
+////        	PreparedStatement prep = myConn.prepareStatement(sql);
+////        	prep.executeUpdate();
+//        	
+//        	//SAMPLE RETRIEVAL STATEMENT AND RESULTSET
+//        	ResultSet rs = myStmt.executeQuery("select * from user");
+//        	while(rs.next())
+//        	{
+//        		System.out.println("Username: " + rs.getString("username") + " Password: " + rs.getString("password"));
+//        	}
+//        }
+//        catch(Exception e)
+//        {
+//        	e.printStackTrace();
+//        }
     }
 
 	/**
