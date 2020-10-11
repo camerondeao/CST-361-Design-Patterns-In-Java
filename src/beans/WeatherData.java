@@ -1,5 +1,7 @@
 package beans;
 
+import java.util.List;
+
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 
@@ -14,6 +16,7 @@ public class WeatherData
 	int humidity;
 	int windSpeed;
 	String day;
+	List<WeatherData> data;
 	
 	public WeatherData()
 	{
@@ -85,13 +88,23 @@ public class WeatherData
 		this.windSpeed = speed;
 	}
 	
-	public String getWeekDay()
+	public String getDay()
 	{
 		return day;
 	}
 	
-	public void setWeekDay(String day)
+	public void setDay(String day)
 	{
 		this.day = day;
+	}
+	
+	public List<WeatherData> getData()
+	{
+		return data;
+	}
+	
+	public void setData(List<WeatherData> inc)
+	{
+		this.data = inc;
 	}
 }

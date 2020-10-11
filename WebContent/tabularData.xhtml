@@ -9,28 +9,37 @@
 <h:head>
 	<title>Add Album Response</title>
 </h:head> 
-
-<body> 
-	<div align="center">
-
-		<h:form align="center">
-			
-			<td><h2>Tabular Data</h2></td>
-			<h:dataTable value="#{WeatherData}" var="WeatherData"
-              style="text-align: center">
-				
-				<h:column>
-					<f:facet name="header">Location</f:facet>
-					
-                  #{WeatherData.location}
-                  
-                </h:column>
-                 
-				
-                  
-			</h:dataTable>
-		</h:form>
-	</div>
-</body> 
-
+	<body> 
+		<div align="center">
+			<h:form align="center">
+				<td><h2>Tabular Data</h2></td>
+				<h:dataTable value="#{weatherData.data}" var = "data" border="2" cellspacing="1" cellpadding="1" style="text-align:center">
+					<h:column>
+						<f:facet name = "header">Location:</f:facet>
+						#{data.location}
+					</h:column>
+					<h:column>
+						<f:facet name = "header">Description:</f:facet>
+						#{data.description}
+					</h:column>
+					<h:column>
+						<f:facet name = "header">Temperature:</f:facet>
+						#{data.temperature}
+					</h:column>
+					<h:column>
+						<f:facet name = "header">Humidity:</f:facet>
+						#{data.humidity}
+					</h:column>
+					<h:column>
+						<f:facet name = "header">Wind Speed:</f:facet>
+						#{data.windSpeed} MPH
+					</h:column>
+					<h:column>
+						<f:facet name = "header">Weekday:</f:facet>
+						#{data.day}
+					</h:column>
+				</h:dataTable>
+			</h:form>  
+		</div>
+	</body> 
 </html>

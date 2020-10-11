@@ -33,7 +33,7 @@ public class GenerateWeatherData implements GenerateWeatherInterface
 	{
 		for(int i = 0; i < data.size(); i++)
 		{
-			data.get(i).setWeekDay(days[i]);
+			data.get(i).setDay(days[i]);
 		}
 	}
 	
