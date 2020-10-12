@@ -17,6 +17,7 @@ public class GenerateWeatherData implements GenerateWeatherInterface
 	@Override
 	public List<WeatherData> generateData(List<WeatherData> data) 
 	{	
+		//Testing
 		WeatherData newData = new WeatherData();
 		newData.setLocation("Frisco, Texas");
 		newData.setTemperature(getRandomTemperature());
