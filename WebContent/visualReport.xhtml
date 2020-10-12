@@ -3,6 +3,7 @@
       xmlns:ui="http://java.sun.com/jsf/facelets"
       xmlns:f="http://java.sun.com/jsf/core"
       xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
       xmlns:pt="http://xmlns.jcp.org/jsf/passthrough">
       
 <h:head>
@@ -12,29 +13,27 @@
 </h:head> 
 
 <body>
-  <div class="container">
-    <h1 class="logo"><a href="#">Weather Tracker</a></h1>
-    <nav>
-      <ul class="navigation">
-        <li><a href="loginForm.xhtml">Login</a></li>
-        <li><a href="registerForm.xhtml">Sign Up</a></li>
-      </ul>
-    </nav>
-  </div>
-
-	
-
-<div class="login-page">
-	<div class="form">
-		<div class="login-form">
-			<!-- VISUAL REPORT -->
-			<h1>Visual Report</h1>
-		</div>
+  	<div class="container">
+	    <h1 class="logo"><a href="#">Weather Tracker</a></h1>
+	    <nav>
+	      <ul class="navigation">
+	        <li><a href="loginForm.xhtml">Login</a></li>
+	        <li><a href="registerForm.xhtml">Sign Up</a></li>
+	      </ul>
+	    </nav>
+  	</div>
+	<div class="login-page">
+		<div class="form">
+			<div class="login-form">
+				<!-- VISUAL REPORT -->
+				<h1>Visual Report</h1>
+			</div>
+			<div align="center">
+		    <p:chart type="line" model="#{lineChartReport.lineModel}" style="height:400px;width:600px"/>
+	    </div>
 	</div>
 </div> 
-<h:form>
-<h:commandButton value="Submit" action="#{tabularDataController.onSubmit()}"></h:commandButton>
-</h:form>
+
 </body> 
 
 </html>
