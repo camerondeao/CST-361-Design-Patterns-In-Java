@@ -1,5 +1,7 @@
 package business;
 
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Random;
 
@@ -11,14 +13,14 @@ import beans.WeatherData;
 public class GenerateWeatherData implements GenerateWeatherInterface 
 {
 	String[] weatherDescriptions = {"Sunny", "Cloudy", "Rainy", "Overcast", "Foggy"};
-	String[] days = {"Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"};
+	String[] days = new String[] {"Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"};
 	Random random = new Random();
 	
 	@Override
 	public List<WeatherData> generateData(List<WeatherData> data) 
 	{	
 		WeatherData newData = new WeatherData();
-		newData.setLocation("Frisco, Texas");
+		newData.setLocation("Frisco");
 		newData.setTemperature(getRandomTemperature());
 		newData.setHumidity(getRandomHumidity());
 		newData.setWindSpeed(getRandomWindSpeed());
@@ -89,5 +91,72 @@ public class GenerateWeatherData implements GenerateWeatherInterface
 		{
 			return;
 		}
+	}
+	
+	public List<WeatherData> shiftData(String day, List<WeatherData> oldData)
+	{
+		int n = 0;
+		int index = 0;
+		List<String> tempDays = new ArrayList<String>();
+		List<WeatherData> weatherData = new ArrayList<WeatherData>();
+		
+		switch(day)
+		{
+		case "Sunday":
+			n = 0;
+			break;
+		case "Monday":
+			n = 1;
+			break;
+		case "Tuesday":
+			n = 2;
+			break;
+		case "Wednesday":
+			n = 3;
+			break;
+		case "Thursday":
+			n = 4;
+			break;
+		case "Friday":
+			n = 5;
+			break;
+		case "Saturday":
+			n = 6;
+			break;
+		}
+		
+		for(int i = days.length - 1; i >= n; i--)
+		{
+			weatherData.add(oldData.get(i));
+		}
+		
+		Collections.reverse(weatherData);
+		System.out.println();
+		System.out.println("PASSED LIST REVERSE DATA");
+		for(int i = 0; i < weatherData.size(); i++)
+		{
+			System.out.print("Day: " + weatherData.get(i).getDay() + " ");
+		}
+		
+		List<WeatherData> newData = new ArrayList<WeatherData>();
+		for(int i = 0; i < n; i++)
+		{
+			newData = generateData(newData);
+		}
+		
+		for(int i = 0; i < newData.size(); i++)
+		{
+			newData.get(i).setDay(days[i]);
+			weatherData.add(newData.get(i));
+		}
+		
+		
+		System.out.println("FINAL DATA LIST: ");
+		for(int i = 0; i < weatherData.size(); i++)
+		{
+			System.out.println("Location: " + weatherData.get(i).getLocation() + " - Description: " + weatherData.get(i).getDescription() + " - Temperature: " + weatherData.get(i).getTemperature()
+			          + " - Humidity: " + weatherData.get(i).getHumidity() + " - Wind Speed: " + weatherData.get(i).getWindSpeed() + " - Weekday: " + weatherData.get(i).getDay());
+		}
+		return weatherData;
 	}
 }
