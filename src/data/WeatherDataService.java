@@ -141,7 +141,7 @@ public class WeatherDataService implements WeatherDataAccessInterface<WeatherDat
 				id = rs.getInt("ID");
 			}
 			
-			String dayQuery = "SELECT * FROM weatherdaily WHERE LOCATION_ID = " + 2;
+			String dayQuery = "SELECT * FROM weatherdaily WHERE LOCATION_ID = " + id;
 			Statement dayStatement = myConn.createStatement();
 			ResultSet dayRS = dayStatement.executeQuery(dayQuery);
 			
@@ -162,5 +162,32 @@ public class WeatherDataService implements WeatherDataAccessInterface<WeatherDat
 			e.printStackTrace();
 		}
 		return dayData;
+	}
+
+	@Override
+	public boolean checkData(String location) 
+	{
+		try
+		{
+			myConn = DriverManager.getConnection(connURL, username, password);
+			String query = "SELECT * FROM weather WHERE LOCATION = ?";
+			
+			PreparedStatement statement = myConn.prepareStatement(query);
+			statement.setString(1, location);
+			
+			ResultSet rs = statement.executeQuery();
+			if(rs.next())
+			{
+				statement.close();
+				rs.close();
+				myConn.close();
+				return true;
+			}
+		}
+		catch(SQLException e)
+		{
+			e.printStackTrace();
+		}
+		return false;
 	}
 }

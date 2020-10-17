@@ -9,4 +9,5 @@ public interface WeatherDataAccessInterface <T>
 	public T create(T t);
 	public boolean update(T t);
 	public boolean delete(T t);
+	public boolean checkData(String location);
 }

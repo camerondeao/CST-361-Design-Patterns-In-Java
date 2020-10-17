@@ -20,7 +20,7 @@ public class GenerateWeatherData implements GenerateWeatherInterface
 	public List<WeatherData> generateData(List<WeatherData> data) 
 	{	
 		WeatherData newData = new WeatherData();
-		newData.setLocation("Frisco");
+		newData.setLocation("California");
 		newData.setTemperature(getRandomTemperature());
 		newData.setHumidity(getRandomHumidity());
 		newData.setWindSpeed(getRandomWindSpeed());
@@ -96,8 +96,6 @@ public class GenerateWeatherData implements GenerateWeatherInterface
 	public List<WeatherData> shiftData(String day, List<WeatherData> oldData)
 	{
 		int n = 0;
-		int index = 0;
-		List<String> tempDays = new ArrayList<String>();
 		List<WeatherData> weatherData = new ArrayList<WeatherData>();
 		
 		switch(day)
@@ -128,6 +126,12 @@ public class GenerateWeatherData implements GenerateWeatherInterface
 		for(int i = days.length - 1; i >= n; i--)
 		{
 			weatherData.add(oldData.get(i));
+		}
+		
+		System.out.println("Pulled data:");
+		for(int i = 0; i < oldData.size(); i++)
+		{
+			System.out.print("Day: " + oldData.get(i).getDay() + " ");
 		}
 		
 		Collections.reverse(weatherData);
