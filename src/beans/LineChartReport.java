@@ -11,6 +11,7 @@ import org.primefaces.model.chart.LineChartModel;
 import org.primefaces.model.chart.LineChartSeries;
 
 import business.GenerateWeatherData;
+import data.WeatherDataService;
 
 import org.primefaces.model.chart.Axis;
 import org.primefaces.model.chart.AxisType;
@@ -27,12 +28,15 @@ public class LineChartReport
 	@PostConstruct
 	public void init()
 	{
-		GenerateWeatherData generate = new GenerateWeatherData();
-		for(int i = 0; i < 7; i++)
-		{
-			data = generate.generateData(data);
-		}
-		generate.setDays(data);
+//		GenerateWeatherData generate = new GenerateWeatherData();
+//		for(int i = 0; i < 7; i++)
+//		{
+//			data = generate.generateData(data);
+//		}
+//		generate.setDays(data);
+		
+		WeatherDataService dao = new WeatherDataService();
+		data = dao.findByLocation("Frisco");
 		
 		lineModel = new LineChartModel();
 		createTemperatureSeries();
@@ -62,13 +66,13 @@ public class LineChartReport
 	{
 		LineChartSeries temps = new LineChartSeries();
 		temps.setLabel("Temperature");
-		temps.set(days[0], data.get(0).getTemperature());
-		temps.set(days[1], data.get(1).getTemperature());
-		temps.set(days[2], data.get(2).getTemperature());
-		temps.set(days[3], data.get(3).getTemperature());
-		temps.set(days[4], data.get(4).getTemperature());
-		temps.set(days[5], data.get(5).getTemperature());
-		temps.set(days[6], data.get(6).getTemperature());
+		temps.set(data.get(0).getDay(), data.get(0).getTemperature());
+		temps.set(data.get(1).getDay(), data.get(1).getTemperature());
+		temps.set(data.get(2).getDay(), data.get(2).getTemperature());
+		temps.set(data.get(3).getDay(), data.get(3).getTemperature());
+		temps.set(data.get(4).getDay(), data.get(4).getTemperature());
+		temps.set(data.get(5).getDay(), data.get(5).getTemperature());
+		temps.set(data.get(6).getDay(), data.get(6).getTemperature());
 		lineModel.addSeries(temps);
 	}
 	
@@ -76,13 +80,13 @@ public class LineChartReport
 	{
 		LineChartSeries humidity = new LineChartSeries();
 		humidity.setLabel("Humidity");
-		humidity.set(days[0], data.get(0).getHumidity());
-		humidity.set(days[1], data.get(1).getHumidity());
-		humidity.set(days[2], data.get(2).getHumidity());
-		humidity.set(days[3], data.get(3).getHumidity());
-		humidity.set(days[4], data.get(4).getHumidity());
-		humidity.set(days[5], data.get(5).getHumidity());
-		humidity.set(days[6], data.get(6).getHumidity());
+		humidity.set(data.get(0).getDay(), data.get(0).getHumidity());
+		humidity.set(data.get(1).getDay(), data.get(1).getHumidity());
+		humidity.set(data.get(2).getDay(), data.get(2).getHumidity());
+		humidity.set(data.get(3).getDay(), data.get(3).getHumidity());
+		humidity.set(data.get(4).getDay(), data.get(4).getHumidity());
+		humidity.set(data.get(5).getDay(), data.get(5).getHumidity());
+		humidity.set(data.get(6).getDay(), data.get(6).getHumidity());
 		lineModel.addSeries(humidity);
 	}
 	
@@ -90,13 +94,13 @@ public class LineChartReport
 	{
 		LineChartSeries windSpeed = new LineChartSeries();
 		windSpeed.setLabel("Wind Speed");
-		windSpeed.set(days[0], data.get(0).getWindSpeed());
-		windSpeed.set(days[1], data.get(1).getWindSpeed());
-		windSpeed.set(days[2], data.get(2).getWindSpeed());
-		windSpeed.set(days[3], data.get(3).getWindSpeed());
-		windSpeed.set(days[4], data.get(4).getWindSpeed());
-		windSpeed.set(days[5], data.get(5).getWindSpeed());
-		windSpeed.set(days[6], data.get(6).getWindSpeed());
+		windSpeed.set(data.get(0).getDay(), data.get(0).getWindSpeed());
+		windSpeed.set(data.get(1).getDay(), data.get(1).getWindSpeed());
+		windSpeed.set(data.get(2).getDay(), data.get(2).getWindSpeed());
+		windSpeed.set(data.get(3).getDay(), data.get(3).getWindSpeed());
+		windSpeed.set(data.get(4).getDay(), data.get(4).getWindSpeed());
+		windSpeed.set(data.get(5).getDay(), data.get(5).getWindSpeed());
+		windSpeed.set(data.get(6).getDay(), data.get(6).getWindSpeed());
 		lineModel.addSeries(windSpeed);
 	}
 }
