@@ -1,5 +1,5 @@
 .login-page {
-	  width: 560px;
+	  width: 860px;
 	  padding: 8% 0 0;
 	  margin: auto;
 	}
@@ -7,7 +7,7 @@
 	  position: relative;
 	  z-index: 1;
 	  background: #FFFFFF;
-	  max-width: 560px;
+	  max-width: 550px;
 	  margin: 0 auto 100px;
 	  padding: 45px;
 	  text-align: center;

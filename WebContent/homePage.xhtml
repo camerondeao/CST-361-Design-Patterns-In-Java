@@ -16,6 +16,12 @@
     <h1 class="logo"><a href="#">Weather Tracker</a></h1>
     <nav>
       <ul class="navigation">
+      	<li><a href="visualReport.xhtml">Visual Report</a></li>
+        <li>
+        	<h:form>
+				<h:commandLink value="Tabular Data" action="#{tabularDataController.onSubmit()}"></h:commandLink>
+			</h:form>
+		</li>
         <li><a href="loginForm.xhtml">Login</a></li>
         <li><a href="registerForm.xhtml">Sign Up</a></li>
       </ul>
@@ -24,11 +30,6 @@
 
 
 <div class="login-page">
-<!-- <p class="message"><a href="visualReport.xhtml">Visual Report</a></p>  --> 
-<p class="message"><a href="visualReport.xhtml">Visual Report</a></p>
-<h:form>
-<h:commandButton value="Tabular Data" action="#{tabularDataController.onSubmit()}"></h:commandButton>
-</h:form>
 	<div class="form">
 		<div class="login-form">
 				<h3  style="text-align:left">Texas</h3>
