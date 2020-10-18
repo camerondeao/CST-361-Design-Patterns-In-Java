@@ -8,49 +8,77 @@
       
 <h:head>
 	<link rel="stylesheet" type="text/css" href="resources/style.css"/>
-	<script src="https://kit.fontawesome.com/41b7117e12.js" crossorigin="anonymous"></script>
 	<title>Weather Tracker | Tabular Report</title>
+	
+	<style>
+		.form{
+			max-width:650px;
+		}
+	
+		.weather-table {
+			width: auto;
+		}
+		
+		.order-table-odd {
+			background: #EEE;
+		}
+		
+		.order-table-header {
+			font-weight: 40px;
+			align: center;
+			padding:10px;
+		}
+	</style>
 </h:head> 
-	<body> 
+
+	<h:body> 
 	<div class="container">
     <h1 class="logo"><a href="#">Weather Tracker</a></h1>
     <nav>
       <ul class="navigation">
+      	<li><a href="visualReport.xhtml">Visual Report</a></li>
+        <li>
+        	<h:form>
+				<h:commandLink value="Tabular Data" action="#{tabularDataController.onSubmit()}"></h:commandLink>
+			</h:form>
+		</li>
         <li><a href="loginForm.xhtml">Login</a></li>
         <li><a href="registerForm.xhtml">Sign Up</a></li>
       </ul>
     </nav>
   </div>
-		<div align="center">
-			<h:form align="center">
-				<td><h2>Tabular Data</h2></td>
-				<h:dataTable value="#{weatherData.data}" var = "data" border="2" cellspacing="1" cellpadding="1" style="text-align:center">
+  
+  <div class="login-page">
+  <div class="form">
+  <h2>Tabular Data</h2>
+				<h:dataTable value="#{weatherData.data}" var = "data" style="text-align:center" styleClass="weather-table" headerClass="order-table-header" rowClasses="order-table-odd, order-table-even" >
 					<h:column>
-						<f:facet name = "header">Location:</f:facet>
+						<f:facet name = "header">Location</f:facet>
 						#{data.location}
 					</h:column>
 					<h:column>
-						<f:facet name = "header">Description:</f:facet>
+						<f:facet name = "header">Description</f:facet>
 						#{data.description}
 					</h:column>
 					<h:column>
-						<f:facet name = "header">Temperature:</f:facet>
+						<f:facet name = "header">Temperature</f:facet>
 						#{data.temperature}
 					</h:column>
 					<h:column>
-						<f:facet name = "header">Humidity:</f:facet>
+						<f:facet name = "header">Humidity</f:facet>
 						#{data.humidity}
 					</h:column>
 					<h:column>
-						<f:facet name = "header">Wind Speed:</f:facet>
+						<f:facet name = "header">Wind Speed</f:facet>
 						#{data.windSpeed} MPH
 					</h:column>
 					<h:column>
-						<f:facet name = "header">Weekday:</f:facet>
+						<f:facet name = "header">Weekday</f:facet>
 						#{data.day}
 					</h:column>
-				</h:dataTable>
-			</h:form>  
-		</div>
-	</body> 
+				</h:dataTable> 
+ 	</div>
+</div>
+		
+	</h:body> 
 </html>

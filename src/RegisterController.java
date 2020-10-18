@@ -1,5 +1,3 @@
-import java.sql.DriverManager;
-
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
@@ -24,8 +22,9 @@ public class RegisterController {
 	{
 		try
 		{
-			
-			Connection myConn = DriverManager.getConnection("jdbc:mysql://localhost:3306/sys", "root", "connection");
+			Connection myConn = DriverManager.getConnection("jdbc:mysql://localhost:3307/sys", "root", "root");	
+
+//			Connection myConn = DriverManager.getConnection("jdbc:mysql://localhost:3306/sys", "root", "connection");
 			String sqlStatement = "INSERT INTO users (firstname, lastname, age, state, emailaddress, username, password) VALUES (?,?,?,?,?,?,?)";
 			
 			PreparedStatement prep = myConn.prepareStatement(sqlStatement);

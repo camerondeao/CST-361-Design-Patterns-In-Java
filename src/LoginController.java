@@ -17,6 +17,7 @@ public class LoginController {
 		if(userService.login(login.getUsername(), login.getPassword())) {
 			return "homePage.xhtml";
 		}
+		
 		return "loginFail.xhtml";
 	}
 	

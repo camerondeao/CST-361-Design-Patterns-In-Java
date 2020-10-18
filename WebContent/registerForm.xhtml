@@ -13,6 +13,12 @@
     <h1 class="logo"><a href="#">Weather Tracker</a></h1>
     <nav>
       <ul class="navigation">
+        <li><a href="visualReport.xhtml">Visual Report</a></li>
+        <li>
+        	<h:form>
+				<h:commandLink value="Tabular Data" action="#{tabularDataController.onSubmit()}"></h:commandLink>
+			</h:form>
+		</li>
         <li><a href="loginForm.xhtml">Login</a></li>
         <li><a href="registerForm.xhtml">Sign Up</a></li>
       </ul>
@@ -37,7 +43,7 @@
 		<h:inputText id="state" value="#{user.state}" title="" pt:placeholder="State" styleClass="input-short"/><h:message for="state"/><br/>
 		</div>
 		<h:inputText id="username" value="#{user.username}" title="" pt:placeholder="Username" styleClass="input"/><h:message for="username"/><br/>
-		<h:inputText id="password" value="#{user.password}" title="" pt:placeholder="Password" styleClass="input"/><h:message for="password"/><br/>
+		<h:inputSecret id="password" value="#{user.password}" title="" pt:placeholder="Password" styleClass="input"/><h:message for="password"/><br/>
 
 		<h:commandButton value="Sign Up" action="#{registerController.onSubmit(user)}" styleClass="button" />
 		<p class="message">Already have an account? <a href="loginForm.xhtml">Sign In</a></p>

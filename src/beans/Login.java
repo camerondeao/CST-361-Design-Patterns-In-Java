@@ -2,11 +2,14 @@ package beans;
 
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
+import javax.validation.constraints.NotNull;
 
 @ManagedBean
 @ViewScoped
 public class Login {
+	@NotNull(message = "The username field is required")
 	String username;
+	@NotNull(message = "The password field is required")
 	String password;
 	
 	public Login() {

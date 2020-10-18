@@ -22,7 +22,9 @@ public class UserDataService
 	{
 		try
 		{
-			Connection myConn = DriverManager.getConnection("jdbc:mysql://localhost:3306/sys", "root", "connection");	
+			Connection myConn = DriverManager.getConnection("jdbc:mysql://localhost:3307/sys", "root", "root");	
+
+//			Connection myConn = DriverManager.getConnection("jdbc:mysql://localhost:3306/sys", "root", "connection");	
 			PreparedStatement statement = myConn.prepareStatement("SELECT * from users WHERE username = ?");
 			statement.setString(1, username);
 			ResultSet rs = statement.executeQuery();

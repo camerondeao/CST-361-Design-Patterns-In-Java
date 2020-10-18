@@ -1,9 +1,39 @@
-<!DOCTYPE html>
-<html>
-<head>
-<title>Insert title here</title>
-</head>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:pt="http://xmlns.jcp.org/jsf/passthrough">
+      
+<h:head>
+	<link rel="stylesheet" type="text/css" href="resources/style.css"/>
+	<title>Weather Tracker | Login Failed</title>
+</h:head> 
+
 <body>
-	Login Failed!
-</body>
+  <div class="container">
+    <h1 class="logo"><a href="#">Weather Tracker</a></h1>
+    <nav>
+      <ul class="navigation">
+      	<li><a href="visualReport.xhtml">Visual Report</a></li>
+        <li>
+        	<h:form>
+				<h:commandLink value="Tabular Data" action="#{tabularDataController.onSubmit()}"></h:commandLink>
+			</h:form>
+		</li>
+        <li><a href="loginForm.xhtml">Login</a></li>
+        <li><a href="registerForm.xhtml">Sign Up</a></li>
+      </ul>
+    </nav>
+  </div>
+
+
+<div class="login-page">
+  <div class="form">
+		<h2>Login Failed</h2>
+		<p class="message">Click<a href="loginForm.xhtml"> here</a> to try again.</p>
+ 	</div>
+</div> 
+</body> 
+
 </html>
