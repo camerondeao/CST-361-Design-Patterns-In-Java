@@ -39,7 +39,7 @@
 		<h:inputText id="username" value="#{user.username}" title="" pt:placeholder="Username" styleClass="input"/><h:message for="username"/><br/>
 		<h:inputText id="password" value="#{user.password}" title="" pt:placeholder="Password" styleClass="input"/><h:message for="password"/><br/>
 
-		<h:commandButton value="Sign Up" action="#{registerController.onSubmit(user)}" styleClass="button" />
+		<h:commandButton value="Sign Up" action="#{userController.onRegister(user)}" styleClass="button" />
 		<p class="message">Already have an account? <a href="loginForm.xhtml">Sign In</a></p>
 		</h:form>
     </div>

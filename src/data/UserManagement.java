@@ -5,6 +5,7 @@ import beans.User;
 public class UserManagement
 {
 	private static UserManagement _instance;
+	
 	public User user = new User();
 	
 	public static UserManagement getInstance()
