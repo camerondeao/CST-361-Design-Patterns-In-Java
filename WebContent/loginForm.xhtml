@@ -25,9 +25,9 @@
 <div class="login-page">
   <div class="form">
 	<h:form class="login-form">
-		<h:inputText id="username" value="#{login.username}" title="" pt:placeholder="Username" styleClass="input"/><h:message for="username"/><br/>
-		<h:inputSecret id="password" value="#{login.password}" title="" pt:placeholder="Password" styleClass="input"/><h:message for="password"/><br/>
-		<h:commandButton value="Login" action="#{loginController.onSubmit(login)}" styleClass="button" />
+		<h:inputText id="username" value="#{user.username}" title="" pt:placeholder="Username" styleClass="input"/><h:message for="username"/><br/>
+		<h:inputSecret id="password" value="#{user.password}" title="" pt:placeholder="Password" styleClass="input"/><h:message for="password"/><br/>
+		<h:commandButton value="Login" action="#{userController.onLogin(user)}" styleClass="button" />
 		<p class="message">Don't have an account? <a href="registerForm.xhtml">Sign Up</a></p>
 	</h:form>
  	</div>

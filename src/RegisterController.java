@@ -25,7 +25,7 @@ public class RegisterController {
 		try
 		{
 			
-			Connection myConn = DriverManager.getConnection("jdbc:mysql://localhost:3306/sys", "root", "connection");
+			Connection myConn = DriverManager.getConnection("jdbc:mysql://localhost:3306/sys", "root", "xkdls123");
 			String sqlStatement = "INSERT INTO users (firstname, lastname, age, state, emailaddress, username, password) VALUES (?,?,?,?,?,?,?)";
 			
 			PreparedStatement prep = myConn.prepareStatement(sqlStatement);
