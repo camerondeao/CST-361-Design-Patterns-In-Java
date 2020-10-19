@@ -198,7 +198,7 @@ public class UserDataService implements UserDataInterface<User>
 		try 
 		{
 			myConn = DriverManager.getConnection(connURL, username, password);
-			String query = " SELECT * FROM users2 WHERE USERNAME = ? " ;
+			String query = " SELECT * FROM users2 WHERE USERNAME = ? ";
 			
 			PreparedStatement statement = myConn.prepareStatement(query);
 			

@@ -26,19 +26,9 @@ public class UserBusinessService implements UserServiceInterface<User>{
 	}
 
 	@Override
-	public boolean login(User user) {
-		
-		UserDataService UserDAO = new UserDataService();
-		
-		boolean result  =  UserDAO.find(user);
-		
-		//System.out.println(String.format("Username: %s ",user.getUsername()));
-				
-		return result;
-		
-		//return service.findBy(user);
+	public boolean login(User user) 
+	{
+		UserDataService dao = new UserDataService();
+		return dao.find(user);
 	}
-	
-
-
 }

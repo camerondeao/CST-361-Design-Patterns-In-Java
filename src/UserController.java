@@ -26,7 +26,6 @@ import data.WeatherDataService;
 @ViewScoped
 public class UserController 
 {
-	
 	public String onLogin(User user) throws SQLException
 	{
 		try
@@ -36,7 +35,6 @@ public class UserController
 			{
 				checkWeatherData();
 				FacesContext.getCurrentInstance().getExternalContext().getRequestMap().put("user", user);
-			
 				return "homePage.xhtml";
 			}
 			else 
@@ -49,7 +47,6 @@ public class UserController
 			System.out.println("Exception occurred");
 			e.printStackTrace();
 		}
-		
 		return "loginFail.xhtml";
 	}
 	
