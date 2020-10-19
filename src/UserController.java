@@ -28,6 +28,7 @@ public class UserController
 {
 	public String onLogin(User user) throws SQLException
 	{
+		//INITIAL MESSAGE
 		try
 		{
 			UserBusinessService UserBS = new UserBusinessService();
