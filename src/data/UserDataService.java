@@ -10,30 +10,16 @@ import javax.ejb.Stateless;
 
 import beans.User;
 
-/***
- * 
- * stmt = conn.prepareStatement("INSERT INTO users(FIRSTNAME, LASTNAME, EMAIL, GENDER, AGE, STATE, USERNAME,PASSWORD) 															VALUES(?,?,?,?,?,?,?,?);");
-					
-					
-					stmt.setString(1, user.getFirstName());
-					stmt.setString(2, user.getLastName());
-					stmt.setString(3, user.getEmail());
-					stmt.setString(4, user.getGender());
-					stmt.setInt(5, user.getAge());
-					stmt.setString(6, user.getState());
-					stmt.setString(7, user.getUsername());
-					stmt.setString(8, user.getPassword());
- *
- */
 @Stateless
 @Local(UserDataInterface.class)
 @LocalBean
 public class UserDataService implements UserDataInterface<User>
 {
 	Connection myConn = null;
-	String connURL = "jdbc:mysql://localhost:3306/sys?serverTimezone=GMT";
+	String connURL = "jdbc:mysql://localhost:3306/sys";
 	String username = "root";
-	String password = "xkdls123";
+	String password = "connection";
+	
 	@Override
 	public List<User> findAll() {
 		List<User> dbUsers = new ArrayList<User>();
@@ -57,11 +43,8 @@ public class UserDataService implements UserDataInterface<User>
 				user.setUsername(user.getUsername());
 				user.setPassword(user.getPassword());
 				
-				
-				rs.close();
-				
+				rs.close();				
 				state.close();
-				
 				
 				dbUsers.add(user);
 				myConn.close();
@@ -78,69 +61,52 @@ public class UserDataService implements UserDataInterface<User>
 		}
 		return dbUsers;
 	}
-//	@Override
-//	public User findById(int id) {
-//		
-//		User foundUser = new User();
-//		try 
-//		{
-//			myConn = DriverManager.getConnection(connURL, username, password);
-//			String query = "SELECT * FROM users2 WHERE ID = ?";
-//			PreparedStatement statement = myConn.prepareStatement(query);
-//			
-//			statement.setInt(1, id);
-//			
-//			ResultSet rs = statement.executeQuery();
-//			while(rs.next())
-//			{
-//				foundUser.setFirstName(rs.getString("FIRSTNAME"));
-//				foundUser.setLastName(rs.getString("LASTANAME"));
-//				foundUser.setEmail(rs.getString("EMAILADDRESS"));
-//				foundUser.setGender(rs.getString("GENDER"));
-//				foundUser.setAge(rs.getInt("AGE"));
-//				foundUser.setState(rs.getString("STATE"));
-//				foundUser.setUsername(rs.getString("USERNAME"));
-//				foundUser.setPassword(rs.getString("PASSWORD"));
-//			}
-//			
-//			
-//	
-//			rs.close();
-//			
-//			statement.close();
-//			
-//			myConn.close();
-//		} 
-//		catch (SQLException e) 
-//		{
-//			e.printStackTrace();
-//			
-//		}
-//		
-//		return foundUser;
-//	}
 	
 	@Override
-	public User findBy(User user) {
+	public User findById(int id) {
 		
-		
+		User foundUser = new User();
 		try 
 		{
 			myConn = DriverManager.getConnection(connURL, username, password);
-//			String query = "SELECT * FROM users2 WHERE FIRSTNAME = ? AND LASTNAME = ? AND EMAILADDRESS = ?  AND GENDER = ?  AND AGE = ? AND STATE = ? AND USERNAME = ?  AND PASSWORD = ?" ;
-//			
-//			PreparedStatement statement = myConn.prepareStatement(query);
-//			
-//			statement.setString(1, user.getFirstName());
-//			statement.setString(2, user.getLastName());
-//			statement.setString(3, user.getEmail());
-//			statement.setString(4, user.getGender());
-//			statement.setInt(5, user.getAge());
-//			statement.setString(6, user.getState());
-//			statement.setString(7, user.getUsername());
-//			statement.setString(8, user.getPassword());
-//			
-//			ResultSet rs = statement.executeQuery();
+			String query = "SELECT * FROM users2 WHERE USERID = ?";
+			PreparedStatement statement = myConn.prepareStatement(query);
+			
+			statement.setInt(1, id);
+			
+			ResultSet rs = statement.executeQuery();
+			while(rs.next())
+			{
+				foundUser.setFirstName(rs.getString("FIRSTNAME"));
+				foundUser.setLastName(rs.getString("LASTNAME"));
+				foundUser.setEmail(rs.getString("EMAILADDRESS"));
+				foundUser.setGender(rs.getString("GENDER"));
+				foundUser.setAge(rs.getInt("AGE"));
+				foundUser.setState(rs.getString("STATE"));
+				foundUser.setUsername(rs.getString("USERNAME"));
+				foundUser.setPassword(rs.getString("PASSWORD"));
+			}
+			
+			rs.close();
+			
+			statement.close();
+			
+			myConn.close();
+		} 
+		catch (SQLException e) 
+		{
+			e.printStackTrace();
+			
+		}
+		return foundUser;
+	}
+	
+	@Override
+	public User findBy(User user) 
+	{
+		try 
+		{
+			myConn = DriverManager.getConnection(connURL, username, password);
 			String query = " SELECT * FROM users2 WHERE USERNAME = ? " ;
 			
 			PreparedStatement statement = myConn.prepareStatement(query);
@@ -159,12 +125,8 @@ public class UserDataService implements UserDataInterface<User>
 				user.setUsername(rs.getString("USERNAME"));
 				user.setPassword(rs.getString("PASSWORD"));
 			}
-			System.out.println("Firstname: " + user.getFirstName() + " Lastname: " + user.getLastName() + " Email: " + user.getEmail()+ " Gender: " + user.getGender()+ " Age: " + user.getAge()+ " State: " + user.getState()+ " Username: " + user.getUsername()+ " Password: " + user.getPassword());
-//			if(rs.next()) {
-//				System.out.println("Username :" + user.getUsername());
-//			}else {
-//			System.out.println("Something is wrong");
-//			}
+			System.out.println("Firstname: " + user.getFirstName() + " Lastname: " + user.getLastName() + " Email: " + user.getEmail()+ " Gender: " 
+			+ user.getGender()+ " Age: " + user.getAge()+ " State: " + user.getState()+ " Username: " + user.getUsername()+ " Password: " + user.getPassword());
 			
 			rs.close();
 			
@@ -180,6 +142,7 @@ public class UserDataService implements UserDataInterface<User>
 		
 		return user;
 	}
+	
 	@Override
 	public boolean create(User user) {
 		boolean found = false;
@@ -187,8 +150,6 @@ public class UserDataService implements UserDataInterface<User>
 		System.out.println("Firstname: " + user.getFirstName() + " Lastname: " + user.getLastName() + " Email: " + user.getEmail()+ " Gender: " + user.getGender()+ " Age: " + user.getAge()+ " State: " + user.getState()+ " Username: " + user.getUsername()+ " Password: " + user.getPassword());
 		try
 		{
-			
-			
 			myConn = DriverManager.getConnection(connURL, username, password);
 			String createQuery = "INSERT INTO users2 (FIRSTNAME,LASTNAME,EMAILADDRESS,GENDER,AGE,STATE,USERNAME,PASSWORD) VALUES (?,?,?,?,?,?,?,?)";
 			
@@ -205,8 +166,6 @@ public class UserDataService implements UserDataInterface<User>
 			
 			p.executeUpdate();
 			
-			
-			
 			myConn.close();
 			
 			found = true;
@@ -218,11 +177,13 @@ public class UserDataService implements UserDataInterface<User>
 		}
 		return found;
 	}
+	
 	@Override
 	public boolean update(User t) {
 		// TODO Auto-generated method stub
 		return false;
 	}
+	
 	@Override
 	public boolean delete(User t) {
 		// TODO Auto-generated method stub
@@ -230,27 +191,13 @@ public class UserDataService implements UserDataInterface<User>
 	}
 
 	@Override
-	public boolean find(User user) {
-		
+	public boolean find(User user) 
+	{	
 		boolean found = false;
 		
 		try 
 		{
 			myConn = DriverManager.getConnection(connURL, username, password);
-//			String query = "SELECT * FROM users2 WHERE FIRSTNAME = ? AND LASTNAME = ? AND EMAILADDRESS = ?  AND GENDER = ?  AND AGE = ? AND STATE = ? AND USERNAME = ?  AND PASSWORD = ?" ;
-//			
-//			PreparedStatement statement = myConn.prepareStatement(query);
-//			
-//			statement.setString(1, user.getFirstName());
-//			statement.setString(2, user.getLastName());
-//			statement.setString(3, user.getEmail());
-//			statement.setString(4, user.getGender());
-//			statement.setInt(5, user.getAge());
-//			statement.setString(6, user.getState());
-//			statement.setString(7, user.getUsername());
-//			statement.setString(8, user.getPassword());
-//			
-//			ResultSet rs = statement.executeQuery();
 			String query = " SELECT * FROM users2 WHERE USERNAME = ? " ;
 			
 			PreparedStatement statement = myConn.prepareStatement(query);
@@ -276,11 +223,6 @@ public class UserDataService implements UserDataInterface<User>
 				
 			}
 			System.out.println("Firstname: " + user.getFirstName() + " Lastname: " + user.getLastName() + " Email: " + user.getEmail()+ " Gender: " + user.getGender()+ " Age: " + user.getAge()+ " State: " + user.getState()+ " Username: " + user.getUsername()+ " Password: " + user.getPassword());
-//			if(rs.next()) {
-//				System.out.println("Username :" + user.getUsername());
-//			}else {
-//			System.out.println("Something is wrong");
-//			}
 			
 			rs.close();
 			
@@ -291,11 +233,7 @@ public class UserDataService implements UserDataInterface<User>
 		catch (SQLException e) 
 		{
 			e.printStackTrace();
-			//throw new DatabaseException();
 		}
-		
 		return found;
 	}
-	
-	
 }

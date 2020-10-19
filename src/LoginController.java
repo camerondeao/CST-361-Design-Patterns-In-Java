@@ -70,7 +70,6 @@ public class LoginController
 			
 			if(!Objects.equals(retrievedData.get(0).getDay(), "Friday")) 
 			{
-				System.out.println("HELLO WORLD");
 				WeatherData data = new WeatherData();
 				data.setLocation("California");
 				data.setData(generate.shiftData("Wednesday", retrievedData));

@@ -20,7 +20,7 @@ public class GenerateWeatherData implements GenerateWeatherInterface
 	public List<WeatherData> generateData(List<WeatherData> data) 
 	{	
 		WeatherData newData = new WeatherData();
-		newData.setLocation("California");
+		newData.setLocation("Arizona");
 		newData.setTemperature(getRandomTemperature());
 		newData.setHumidity(getRandomHumidity());
 		newData.setWindSpeed(getRandomWindSpeed());
