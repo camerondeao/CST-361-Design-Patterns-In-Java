@@ -1,12 +1,23 @@
 package data;
 
 import java.util.List;
+
+import javax.ejb.Local;
+import javax.ejb.LocalBean;
+import javax.ejb.Stateless;
+import javax.interceptor.Interceptors;
+
 import java.util.ArrayList;
 
 import java.sql.*;
 
 import beans.WeatherData;
+import business.LoggingInterceptor;
 
+@Stateless
+@Local(WeatherDataAccessInterface.class)
+@LocalBean
+@Interceptors(LoggingInterceptor.class)
 public class WeatherDataService implements WeatherDataAccessInterface<WeatherData>
 {
 
@@ -93,7 +104,6 @@ public class WeatherDataService implements WeatherDataAccessInterface<WeatherDat
 			while(testRS.next())
 			{
 				newID = testRS.getInt("ID");
-				System.out.println("TESTING ID RETRIEVAL: " + newID);
 				String dataQuery = "UPDATE weatherdaily SET DESCRIPTION = ?, TEMPERATURE = ?, HUMIDITY = ?, WINDSPEED = ?, DAY = ? WHERE ID = " + newID; 
 				PreparedStatement dataPrep = myConn.prepareStatement(dataQuery);
 				dataPrep.setString(1, t.getData().get(index).getDescription());

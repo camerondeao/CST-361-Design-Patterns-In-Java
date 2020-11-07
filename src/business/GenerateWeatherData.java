@@ -5,20 +5,32 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Random;
 
+import javax.ejb.Local;
+import javax.ejb.LocalBean;
 import javax.ejb.Stateless;
+import javax.interceptor.Interceptors;
+import business.LoggingInterceptor;
 
 import beans.WeatherData;
 
 @Stateless
+@Local(GenerateWeatherInterface.class)
+@LocalBean
+@Interceptors(LoggingInterceptor.class)
 public class GenerateWeatherData implements GenerateWeatherInterface 
 {
 	String[] weatherDescriptions = {"Sunny", "Cloudy", "Rainy", "Overcast", "Foggy"};
 	String[] days = new String[] {"Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"};
 	Random random = new Random();
 	
+	
 	@Override
+	@Interceptors(LoggingInterceptor.class)
 	public List<WeatherData> generateData(List<WeatherData> data) 
 	{	
+		System.out.println("INSIDE GENERATE WEATHER");
+		
+		
 		WeatherData newData = new WeatherData();
 		newData.setLocation("Arizona");
 		newData.setTemperature(getRandomTemperature());

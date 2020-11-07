@@ -11,6 +11,9 @@ import javax.ws.rs.core.MediaType;
 import beans.User;
 import beans.UserResponseDataModel;
 import data.UserDataService;
+import util.FactoryDTO;
+import util.FactoryService;
+import util.FactoryService.DTOType;
 
 @RequestScoped
 @Path("/user")
@@ -18,17 +21,19 @@ import data.UserDataService;
 @Consumes("application/xml, application/json")
 public class UserRestService 
 {
+	FactoryService service = new FactoryService();
+	
 	@GET
 	@Path("/getuserj/{id}")
 	@Produces(MediaType.APPLICATION_JSON)
 	public UserResponseDataModel getuserj(@PathParam("id")int id)
 	{
 		User user = new User();
-		UserDataService dao = new UserDataService();
-		
+		FactoryDTO userDTO = service.getDTO(DTOType.USER);
+
 		try
 		{
-			user = dao.findById(id);
+			user = (User) userDTO.findBy(id);
 			UserResponseDataModel model = new UserResponseDataModel(0, "", user);
 			return model;
 		}
@@ -45,11 +50,11 @@ public class UserRestService
 	public UserResponseDataModel getuserx(@PathParam("id")int id)
 	{
 		User user = new User();
-		UserDataService dao = new UserDataService();
+		FactoryDTO userDTO = service.getDTO(DTOType.USER);
 		
 		try
 		{
-			user = dao.findById(id);
+			user = (User) userDTO.findBy(id);
 			UserResponseDataModel model = new UserResponseDataModel(0, "", user);
 			return model;
 		}

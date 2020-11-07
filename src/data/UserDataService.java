@@ -1,18 +1,22 @@
 package data;
 
-import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
 import javax.ejb.Local;
 import javax.ejb.LocalBean;
 import javax.ejb.Stateless;
+import javax.interceptor.Interceptors;
 
 import beans.User;
+import business.LoggingInterceptor;
+
+import java.sql.*;
 
 @Stateless
 @Local(UserDataInterface.class)
 @LocalBean
+@Interceptors(LoggingInterceptor.class)
 public class UserDataService implements UserDataInterface<User>
 {
 	Connection myConn = null;
