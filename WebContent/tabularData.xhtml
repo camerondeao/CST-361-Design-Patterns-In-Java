@@ -6,8 +6,10 @@
       xmlns:f="http://java.sun.com/jsf/core"
       xmlns:h="http://java.sun.com/jsf/html"> 
       
+         <ui:composition template="/layouts/commonLayout.xhtml">
+	<ui:define name="content">
+	
 <h:head>
-	<link rel="stylesheet" type="text/css" href="resources/style.css"/>
 	<title>Weather Tracker | Tabular Report</title>
 	
 	<style>
@@ -31,23 +33,8 @@
 	</style>
 </h:head> 
 
-	<h:body> 
-	<div class="container">
-    <h1 class="logo"><a href="#">Weather Tracker</a></h1>
-    <nav>
-      <ul class="navigation">
-      	<li><a href="visualReport.xhtml">Visual Report</a></li>
-        <li>
-        	<h:form>
-				<h:commandLink value="Tabular Data" action="#{tabularDataController.onSubmit()}"></h:commandLink>
-			</h:form>
-		</li>
-        <li><a href="loginForm.xhtml">Login</a></li>
-        <li><a href="registerForm.xhtml">Sign Up</a></li>
-      </ul>
-    </nav>
-  </div>
-  
+<h:body> 
+
   <div class="login-page">
   <div class="form">
   <h2>Tabular Data</h2>
@@ -81,4 +68,6 @@
 </div>
 		
 	</h:body> 
+	</ui:define>
+	</ui:composition>
 </html>

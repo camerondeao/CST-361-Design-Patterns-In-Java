@@ -1,12 +1,14 @@
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 
 import beans.WeatherData;
 import business.GenerateWeatherData;
+import data.WeatherDataAccessInterface;
 import data.WeatherDataService;
 
 import java.util.Date;
@@ -16,6 +18,9 @@ import java.text.SimpleDateFormat;
 @ViewScoped
 public class TabularDataController 
 {
+	@EJB
+	WeatherDataAccessInterface<WeatherData> dao;
+	
 	public String onSubmit()
 	{
 //	 	List<WeatherData> data = new ArrayList<WeatherData>();
@@ -37,9 +42,8 @@ public class TabularDataController
 //        }
 		
         List<WeatherData> testing = new ArrayList<WeatherData>();
-        WeatherDataService dao = new WeatherDataService();
         
-        testing = dao.findByLocation("Frisco");
+        testing = dao.findByLocation("Arizona");
         
         for(int i = 0; i < testing.size(); i++)
         {
@@ -57,7 +61,7 @@ public class TabularDataController
 //        System.out.println("Today is: " + date);
 //        generate.shiftArray(date);
         FacesContext.getCurrentInstance().getExternalContext().getRequestMap().put("weatherData", dataTest);
-	        
+           
 		return "tabularData.xhtml";
 	}	
 }

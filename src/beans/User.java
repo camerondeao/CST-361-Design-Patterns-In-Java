@@ -7,21 +7,21 @@ import javax.validation.constraints.NotNull;
 @ManagedBean
 @ViewScoped
 public class User {
-	@NotNull(message = "Please enter your first name. This is a required field.")
+	@NotNull(message = "*Please enter your first name. This is a required field.")
 	String firstName;
-	@NotNull(message = "Please enter your last name. This is a required field.")
+	@NotNull(message = "*Please enter your last name. This is a required field.")
 	String lastName;
-	@NotNull(message = "Please enter your email address. This is a required field.")
+	@NotNull(message = "*Please enter your email address. This is a required field.")
 	String email;
-	@NotNull(message = "Please enter your gender. This is a required field.")
+	@NotNull(message = "*Please enter your gender. This is a required field.")
 	String gender;
-	@NotNull(message = "Please enter your age. This is a required field.")
+	@NotNull(message = "*Please enter your age. This is a required field.")
 	int age;
-	@NotNull(message = "Please enter your state. This is a required field.")
+	@NotNull(message = "*Please enter your state. This is a required field.")
 	String state;
-	@NotNull(message = "Please enter your username. This is a required field.")
+	@NotNull(message = "*Please enter your username. This is a required field.")
 	String username;
-	@NotNull(message = "Please enter your password. This is a required field.")
+	@NotNull(message = "*Please enter your password. This is a required field.")
 	String password;
 	
 	public User() {

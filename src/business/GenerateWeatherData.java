@@ -11,7 +11,7 @@ import beans.WeatherData;
 
 @Stateless
 public class GenerateWeatherData implements GenerateWeatherInterface 
-{
+{		
 	String[] weatherDescriptions = {"Sunny", "Cloudy", "Rainy", "Overcast", "Foggy"};
 	String[] days = new String[] {"Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"};
 	Random random = new Random();
