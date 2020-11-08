@@ -5,23 +5,14 @@
       xmlns:h="http://java.sun.com/jsf/html"
       xmlns:pt="http://xmlns.jcp.org/jsf/passthrough">
       
+         <ui:composition template="/layouts/commonLayout.xhtml">
+	<ui:define name="content">
+	
 <h:head>
-	<link rel="stylesheet" type="text/css" href="resources/style.css"/>
 	<title>Weather Tracker | Sign In</title>
 </h:head> 
 
 <body>
-  <div class="container">
-    <h1 class="logo"><a href="#">Weather Tracker</a></h1>
-    <nav>
-      <ul class="navigation">
-        <li><a href="loginForm.xhtml">Login</a></li>
-        <li><a href="registerForm.xhtml">Sign Up</a></li>
-      </ul>
-    </nav>
-  </div>
-
-
 <div class="login-page">
   <div class="form">
 	<div class="login-form">
@@ -31,5 +22,7 @@
  	</div>
 </div> 
 </body> 
+</ui:define>
+</ui:composition>
 
 </html>

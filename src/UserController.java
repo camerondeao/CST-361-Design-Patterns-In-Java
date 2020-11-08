@@ -6,6 +6,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.Objects;
 
+import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 
 import javax.faces.bean.ViewScoped;
@@ -16,21 +17,31 @@ import javax.inject.Inject;
 import beans.User;
 import beans.WeatherData;
 import business.GenerateWeatherData;
+import business.GenerateWeatherInterface;
 import business.UserBusinessService;
 import business.UserServiceInterface;
 import data.UserDataService;
 import data.UserManagement;
+import data.WeatherDataAccessInterface;
 import data.WeatherDataService;
 
 @ManagedBean
 @ViewScoped
 public class UserController 
 {
+	@EJB
+	UserServiceInterface UserBS;
+	
+	@EJB
+	GenerateWeatherInterface generate;
+	
+	@EJB
+	WeatherDataAccessInterface<WeatherData> dao;
+	
 	public String onLogin(User user) throws SQLException
 	{
 		try
 		{
-			UserBusinessService UserBS = new UserBusinessService();
 			if(UserBS.login(user))
 			{
 				checkWeatherData();
@@ -54,8 +65,6 @@ public class UserController
 	{
 		try 
 		{
-			UserBusinessService UserBS = new UserBusinessService();
-
 			UserBS.register(user);
 			
 		}
@@ -70,11 +79,13 @@ public class UserController
 		return "registerResponse.xhtml";
 	}
 	
+	public String onLogoff() {
+		//redirect to protected page to get login page
+		return "homePage.xhtml?faces-redirect=true";
+	}
+	
 	private void checkWeatherData()
-	{
-		WeatherDataService dao = new WeatherDataService();
-		GenerateWeatherData generate = new GenerateWeatherData();
-		
+	{		
 		if(dao.checkData("Arizona"))
 		{
 			List<WeatherData> retrievedData = new ArrayList<WeatherData>();

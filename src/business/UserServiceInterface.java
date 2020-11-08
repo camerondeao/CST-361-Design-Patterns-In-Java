@@ -5,7 +5,7 @@ import java.sql.SQLException;
 import beans.User;
 
 
-public interface UserServiceInterface <T> {
+public interface UserServiceInterface {
 
 	// method to register
 		public boolean register(User user) throws SQLException;

@@ -5,40 +5,25 @@
       xmlns:h="http://java.sun.com/jsf/html"
       xmlns:pt="http://xmlns.jcp.org/jsf/passthrough">
       
+         <ui:composition template="/layouts/commonLayout.xhtml">
+	<ui:define name="content">
+      
 <h:head>
-	<link rel="stylesheet" type="text/css" href="resources/style.css"/>
 	<title>Weather Tracker | Sign In</title>
 </h:head> 
 
 <body>
-  <div class="container">
-    <h1 class="logo"><a href="#">Weather Tracker</a></h1>
-    <nav>
-      <ul class="navigation">
-      	<li><a href="visualReport.xhtml">Visual Report</a></li>
-        <li>
-        	<h:form>
-				<h:commandLink value="Tabular Data" action="#{tabularDataController.onSubmit()}"></h:commandLink>
-			</h:form>
-		</li>
-        <li><a href="loginForm.xhtml">Login</a></li>
-        <li><a href="registerForm.xhtml">Sign Up</a></li>
-      </ul>
-    </nav>
-  </div>
-
-
 <div class="login-page">
   <div class="form">
 	<h:form class="login-form">
-		<h:inputText id="username" value="#{user.username}" title="username" pt:placeholder="Username" styleClass="input"/><h:message for="username"/><br/>
-		<h:inputSecret id="password" value="#{user.password}" title="password" pt:placeholder="Password" styleClass="input"/><h:message for="password"/><br/>
+		<h:inputText id="username" value="#{user.username}" title="username" pt:placeholder="Username" styleClass="input"/><h:message style="color: red;" for="username"/><br/>
+		<h:inputSecret id="password" value="#{user.password}" title="password" pt:placeholder="Password" styleClass="input"/><h:message style="color: red;"  for="password"/><br/>
 		<h:commandButton value="Login" action="#{userController.onLogin(user)}" styleClass="button" />
 		<p class="message">Don't have an account? <a href="registerForm.xhtml">Sign Up</a></p>
 	</h:form>
-	<h:messages/>
  	</div>
 </div> 
 </body> 
-
+</ui:define>
+</ui:composition>
 </html>

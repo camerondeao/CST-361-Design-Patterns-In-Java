@@ -1,5 +1,6 @@
 package business;
 
+import javax.ejb.EJB;
 import javax.enterprise.context.RequestScoped;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
@@ -10,6 +11,7 @@ import javax.ws.rs.core.MediaType;
 
 import beans.User;
 import beans.UserResponseDataModel;
+import data.UserDataInterface;
 import data.UserDataService;
 
 @RequestScoped
@@ -18,17 +20,19 @@ import data.UserDataService;
 @Consumes("application/xml, application/json")
 public class UserRestService 
 {
+	@EJB
+	UserDataInterface<User> dao;
+	
 	@GET
 	@Path("/getuserj/{id}")
 	@Produces(MediaType.APPLICATION_JSON)
 	public UserResponseDataModel getuserj(@PathParam("id")int id)
 	{
 		User user = new User();
-		UserDataService dao = new UserDataService();
 		
 		try
 		{
-			user = dao.findById(id);
+			user =dao.findById(id);
 			UserResponseDataModel model = new UserResponseDataModel(0, "", user);
 			return model;
 		}
@@ -45,7 +49,6 @@ public class UserRestService
 	public UserResponseDataModel getuserx(@PathParam("id")int id)
 	{
 		User user = new User();
-		UserDataService dao = new UserDataService();
 		
 		try
 		{

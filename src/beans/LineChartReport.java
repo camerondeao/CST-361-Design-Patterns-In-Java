@@ -36,7 +36,7 @@ public class LineChartReport
 //		generate.setDays(data);
 		
 		WeatherDataService dao = new WeatherDataService();
-		data = dao.findByLocation("Frisco");
+		data = dao.findByLocation("Arizona");
 		
 		lineModel = new LineChartModel();
 		createTemperatureSeries();

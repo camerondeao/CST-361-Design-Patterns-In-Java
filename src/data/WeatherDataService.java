@@ -1,19 +1,27 @@
 package data;
 
 import java.util.List;
+
+import javax.ejb.Local;
+import javax.ejb.LocalBean;
+import javax.ejb.Stateless;
+
 import java.util.ArrayList;
 
 import java.sql.*;
 
 import beans.WeatherData;
 
+@Stateless
+@Local(WeatherDataAccessInterface.class)
+@LocalBean
 public class WeatherDataService implements WeatherDataAccessInterface<WeatherData>
 {
 
 	Connection myConn = null;
-	String connURL = "jdbc:mysql://localhost:3306/sys";
+	String connURL = "jdbc:mysql://localhost:3307/sys";
 	String username = "root";
-	String password = "connection";
+	String password = "root";
 	
 	@Override
 	public List<WeatherData> findAll() 
