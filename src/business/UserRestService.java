@@ -13,6 +13,9 @@ import beans.User;
 import beans.UserResponseDataModel;
 import data.UserDataInterface;
 import data.UserDataService;
+import util.FactoryDTO;
+import util.FactoryService;
+import util.FactoryService.DTOType;
 
 @RequestScoped
 @Path("/user")
@@ -20,8 +23,12 @@ import data.UserDataService;
 @Consumes("application/xml, application/json")
 public class UserRestService 
 {
+<<<<<<< HEAD
 	@EJB
 	UserDataInterface<User> dao;
+=======
+	FactoryService service = new FactoryService();
+>>>>>>> LoggingService
 	
 	@GET
 	@Path("/getuserj/{id}")
@@ -29,10 +36,18 @@ public class UserRestService
 	public UserResponseDataModel getuserj(@PathParam("id")int id)
 	{
 		User user = new User();
+<<<<<<< HEAD
 		
 		try
 		{
 			user =dao.findById(id);
+=======
+		FactoryDTO userDTO = service.getDTO(DTOType.USER);
+
+		try
+		{
+			user = (User) userDTO.findBy(id);
+>>>>>>> LoggingService
 			UserResponseDataModel model = new UserResponseDataModel(0, "", user);
 			return model;
 		}
@@ -49,10 +64,14 @@ public class UserRestService
 	public UserResponseDataModel getuserx(@PathParam("id")int id)
 	{
 		User user = new User();
+<<<<<<< HEAD
+=======
+		FactoryDTO userDTO = service.getDTO(DTOType.USER);
+>>>>>>> LoggingService
 		
 		try
 		{
-			user = dao.findById(id);
+			user = (User) userDTO.findBy(id);
 			UserResponseDataModel model = new UserResponseDataModel(0, "", user);
 			return model;
 		}

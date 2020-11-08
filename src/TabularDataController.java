@@ -3,44 +3,43 @@ import java.util.List;
 
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
-import javax.faces.bean.ViewScoped;
+import javax.faces.view.ViewScoped;
 import javax.faces.context.FacesContext;
+import javax.inject.Named;
+import javax.interceptor.Interceptors;
 
 import beans.WeatherData;
 import business.GenerateWeatherData;
+<<<<<<< HEAD
 import data.WeatherDataAccessInterface;
+=======
+import business.LoggingInterceptor;
+>>>>>>> LoggingService
 import data.WeatherDataService;
 
 import java.util.Date;
+import java.io.Serializable;
 import java.text.SimpleDateFormat;
 
-@ManagedBean
+//@ManagedBean
+//@ViewScoped
+@Named
 @ViewScoped
-public class TabularDataController 
+@Interceptors(LoggingInterceptor.class)
+public class TabularDataController implements Serializable
 {
+<<<<<<< HEAD
 	@EJB
 	WeatherDataAccessInterface<WeatherData> dao;
 	
+=======
+	private static final long serialVersionUID = 1L;
+
+>>>>>>> LoggingService
 	public String onSubmit()
 	{
-//	 	List<WeatherData> data = new ArrayList<WeatherData>();
-//        GenerateWeatherData generate = new GenerateWeatherData();
-//        for(int i = 0; i < 7; i++)
-//        {
-//        	data = generate.generateData(data);
-//        }
-//        generate.setDays(data);
-//        
-//        WeatherData newStuff = new WeatherData();
-//        newStuff.setData(data);
-//        newStuff.setLocation(data.get(0).getLocation());
-//        
-//        for(int i = 0; i < data.size(); i++)
-//        {
-//        	System.out.println("Location: " + data.get(i).getLocation() + " - Description: " + data.get(i).getDescription() + " - Temperature: " + data.get(i).getTemperature()
-//          + " - Humidity: " + data.get(i).getHumidity() + " - Wind Speed: " + data.get(i).getWindSpeed() + " - Weekday: " + data.get(i).getDay());
-//        }
 		
+<<<<<<< HEAD
         List<WeatherData> testing = new ArrayList<WeatherData>();
         
         testing = dao.findByLocation("Arizona");
@@ -62,6 +61,19 @@ public class TabularDataController
 //        generate.shiftArray(date);
         FacesContext.getCurrentInstance().getExternalContext().getRequestMap().put("weatherData", dataTest);
            
+=======
+        List<WeatherData> data = new ArrayList<WeatherData>();
+        WeatherDataService dao = new WeatherDataService();
+        
+        data = dao.findByLocation("Frisco");
+
+        WeatherData newData = new WeatherData();
+        newData.setData(data);
+        newData.setLocation(data.get(0).getLocation());
+        
+        FacesContext.getCurrentInstance().getExternalContext().getRequestMap().put("weatherData", newData);
+	        
+>>>>>>> LoggingService
 		return "tabularData.xhtml";
 	}	
 }

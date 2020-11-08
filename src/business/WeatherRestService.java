@@ -11,6 +11,9 @@ import javax.ws.rs.core.MediaType;
 import beans.WeatherData;
 import beans.WeatherResponseDataModel;
 import data.WeatherDataService;
+import util.FactoryDTO;
+import util.FactoryService;
+import util.FactoryService.DTOType;
 
 @RequestScoped
 @Path("/weather")
@@ -18,18 +21,20 @@ import data.WeatherDataService;
 @Consumes("application/xml, application/json")
 public class WeatherRestService 
 {
+	FactoryService service = new FactoryService();
+	
 	@GET
 	@Path("/getweatherj/{location}")
 	@Produces(MediaType.APPLICATION_JSON)
 	public WeatherResponseDataModel getWeatherj(@PathParam("location")String location)
 	{
 		WeatherData data = new WeatherData();
-		WeatherDataService dao = new WeatherDataService();
 		
 		try
 		{
 			data.setLocation(location);
-			data.setData(dao.findByLocation(location));
+			FactoryDTO weatherDTO = service.getDTO(DTOType.WEATHER); 
+			data.setData(weatherDTO.findAll(location));
 			
 			WeatherResponseDataModel model = new WeatherResponseDataModel(0, "", data);
 			return model;
@@ -47,12 +52,12 @@ public class WeatherRestService
 	public WeatherResponseDataModel getWeatherx(@PathParam("location")String location)
 	{
 		WeatherData data = new WeatherData();
-		WeatherDataService dao = new WeatherDataService();
 		
 		try
 		{
 			data.setLocation(location);
-			data.setData(dao.findByLocation(location));
+			FactoryDTO weatherDTO = service.getDTO(DTOType.WEATHER);
+			data.setData(weatherDTO.findAll(location));
 			
 			WeatherResponseDataModel model = new WeatherResponseDataModel(0, "", data);
 			return model;
