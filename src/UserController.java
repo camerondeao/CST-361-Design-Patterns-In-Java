@@ -8,12 +8,9 @@ import java.util.List;
 import java.util.Objects;
 
 import javax.ejb.EJB;
-<<<<<<< HEAD
-=======
 import javax.ejb.Local;
 import javax.ejb.LocalBean;
 import javax.ejb.Stateless;
->>>>>>> LoggingService
 import javax.faces.bean.ManagedBean;
 
 //import javax.faces.bean.ViewScoped;
@@ -26,10 +23,7 @@ import beans.User;
 import beans.WeatherData;
 import business.GenerateWeatherData;
 import business.GenerateWeatherInterface;
-<<<<<<< HEAD
-=======
 import business.LoggingInterceptor;
->>>>>>> LoggingService
 import business.UserBusinessService;
 import business.UserServiceInterface;
 import data.UserDataInterface;
@@ -50,7 +44,8 @@ import javax.inject.Named;
 @Interceptors(LoggingInterceptor.class)
 public class UserController implements Serializable
 {
-<<<<<<< HEAD
+	private static final long serialVersionUID = 1L;
+	
 	@EJB
 	UserServiceInterface UserBS;
 	
@@ -59,8 +54,6 @@ public class UserController implements Serializable
 	
 	@EJB
 	WeatherDataAccessInterface<WeatherData> dao;
-=======
-	private static final long serialVersionUID = 1L;
 	
 	@EJB
 	ApplicationLogger logger;
@@ -69,24 +62,16 @@ public class UserController implements Serializable
 	GenerateWeatherInterface weather;
 	
 	@EJB
-	UserDataInterface dao;
+	UserDataInterface userDAO;
 	
 	@EJB
 	WeatherDataAccessInterface weatherDAO;
->>>>>>> LoggingService
 	
 	public String onLogin(User user) throws SQLException
-	{
-		//logger.logInfo("TESTING");
-		//logger.logDebug("DEBUG TEST");
-		
+	{	
 		try
 		{
-<<<<<<< HEAD
-			if(UserBS.login(user))
-=======
-			if(dao.find(user)) 
->>>>>>> LoggingService
+			if(userDAO.find(user)) 
 			{
 				checkWeatherData();
 				FacesContext.getCurrentInstance().getExternalContext().getRequestMap().put("user", user);
@@ -109,12 +94,12 @@ public class UserController implements Serializable
 	{
 		try 
 		{
-<<<<<<< HEAD
+
 			UserBS.register(user);
-=======
+
 			UserBusinessService UserBS = new UserBusinessService();
-			dao.create(user);
->>>>>>> LoggingService
+			userDAO.create(user);
+
 			
 		}
 		catch(Exception e)
@@ -134,26 +119,21 @@ public class UserController implements Serializable
 	}
 	
 	private void checkWeatherData()
-<<<<<<< HEAD
 	{		
-		if(dao.checkData("Arizona"))
-=======
-	{
 		WeatherDataService dao = new WeatherDataService();
 		GenerateWeatherData generate = new GenerateWeatherData();
 		
-		if(weatherDAO.checkData("Arizona"))
->>>>>>> LoggingService
+		if(weatherDAO.checkData("Dallas"))
 		{
 			List<WeatherData> retrievedData = new ArrayList<WeatherData>();
 			String day = getDay();
 			
-			retrievedData = dao.findByLocation("Arizona");
+			retrievedData = dao.findByLocation("Dallas");
 			
 			if(!Objects.equals(retrievedData.get(0), day))
 			{
 				WeatherData data = new WeatherData();
-				data.setLocation("Arizona");
+				data.setLocation("Dallas");
 				data.setData(generate.shiftData(day, retrievedData));
 				weatherDAO.update(data);
 			}

@@ -5,32 +5,23 @@ import java.util.List;
 import javax.ejb.Local;
 import javax.ejb.LocalBean;
 import javax.ejb.Stateless;
-<<<<<<< HEAD
-=======
 import javax.interceptor.Interceptors;
->>>>>>> LoggingService
-
 import java.util.ArrayList;
-
 import java.sql.*;
-
 import beans.WeatherData;
 import business.LoggingInterceptor;
 
 @Stateless
 @Local(WeatherDataAccessInterface.class)
 @LocalBean
-<<<<<<< HEAD
-=======
 @Interceptors(LoggingInterceptor.class)
->>>>>>> LoggingService
 public class WeatherDataService implements WeatherDataAccessInterface<WeatherData>
 {
 
 	Connection myConn = null;
-	String connURL = "jdbc:mysql://localhost:3307/sys";
+	String connURL = "jdbc:mysql://localhost:3306/sys";
 	String username = "root";
-	String password = "root";
+	String password = "connection";
 	
 	@Override
 	public List<WeatherData> findAll() 

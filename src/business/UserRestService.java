@@ -22,32 +22,21 @@ import util.FactoryService.DTOType;
 @Produces("application/xml, applicaiton/json")
 @Consumes("application/xml, application/json")
 public class UserRestService 
-{
-<<<<<<< HEAD
-	@EJB
-	UserDataInterface<User> dao;
-=======
+{	
 	FactoryService service = new FactoryService();
->>>>>>> LoggingService
 	
 	@GET
 	@Path("/getuserj/{id}")
 	@Produces(MediaType.APPLICATION_JSON)
 	public UserResponseDataModel getuserj(@PathParam("id")int id)
 	{
-		User user = new User();
-<<<<<<< HEAD
+		User user = new User();		
+		FactoryDTO userDTO = service.getDTO(DTOType.USER);
 		
 		try
 		{
-			user =dao.findById(id);
-=======
-		FactoryDTO userDTO = service.getDTO(DTOType.USER);
-
-		try
-		{
 			user = (User) userDTO.findBy(id);
->>>>>>> LoggingService
+			
 			UserResponseDataModel model = new UserResponseDataModel(0, "", user);
 			return model;
 		}
@@ -64,10 +53,7 @@ public class UserRestService
 	public UserResponseDataModel getuserx(@PathParam("id")int id)
 	{
 		User user = new User();
-<<<<<<< HEAD
-=======
 		FactoryDTO userDTO = service.getDTO(DTOType.USER);
->>>>>>> LoggingService
 		
 		try
 		{

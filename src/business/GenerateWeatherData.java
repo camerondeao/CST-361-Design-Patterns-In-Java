@@ -28,11 +28,8 @@ public class GenerateWeatherData implements GenerateWeatherInterface
 	@Interceptors(LoggingInterceptor.class)
 	public List<WeatherData> generateData(List<WeatherData> data) 
 	{	
-		System.out.println("INSIDE GENERATE WEATHER");
-		
-		
 		WeatherData newData = new WeatherData();
-		newData.setLocation("Arizona");
+		newData.setLocation("Dallas");
 		newData.setTemperature(getRandomTemperature());
 		newData.setHumidity(getRandomHumidity());
 		newData.setWindSpeed(getRandomWindSpeed());
@@ -140,19 +137,19 @@ public class GenerateWeatherData implements GenerateWeatherInterface
 			weatherData.add(oldData.get(i));
 		}
 		
-		System.out.println("Pulled data:");
-		for(int i = 0; i < oldData.size(); i++)
-		{
-			System.out.print("Day: " + oldData.get(i).getDay() + " ");
-		}
+//		System.out.println("Pulled data:");
+//		for(int i = 0; i < oldData.size(); i++)
+//		{
+//			System.out.print("Day: " + oldData.get(i).getDay() + " ");
+//		}
 		
 		Collections.reverse(weatherData);
-		System.out.println();
-		System.out.println("PASSED LIST REVERSE DATA");
-		for(int i = 0; i < weatherData.size(); i++)
-		{
-			System.out.print("Day: " + weatherData.get(i).getDay() + " ");
-		}
+//		System.out.println();
+//		System.out.println("PASSED LIST REVERSE DATA");
+//		for(int i = 0; i < weatherData.size(); i++)
+//		{
+//			System.out.print("Day: " + weatherData.get(i).getDay() + " ");
+//		}
 		
 		List<WeatherData> newData = new ArrayList<WeatherData>();
 		for(int i = 0; i < n; i++)

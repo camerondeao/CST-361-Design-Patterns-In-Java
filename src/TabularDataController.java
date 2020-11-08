@@ -10,11 +10,8 @@ import javax.interceptor.Interceptors;
 
 import beans.WeatherData;
 import business.GenerateWeatherData;
-<<<<<<< HEAD
 import data.WeatherDataAccessInterface;
-=======
 import business.LoggingInterceptor;
->>>>>>> LoggingService
 import data.WeatherDataService;
 
 import java.util.Date;
@@ -28,21 +25,17 @@ import java.text.SimpleDateFormat;
 @Interceptors(LoggingInterceptor.class)
 public class TabularDataController implements Serializable
 {
-<<<<<<< HEAD
 	@EJB
 	WeatherDataAccessInterface<WeatherData> dao;
 	
-=======
+
 	private static final long serialVersionUID = 1L;
 
->>>>>>> LoggingService
 	public String onSubmit()
 	{
-		
-<<<<<<< HEAD
         List<WeatherData> testing = new ArrayList<WeatherData>();
         
-        testing = dao.findByLocation("Arizona");
+        testing = dao.findByLocation("Dallas");
         
         for(int i = 0; i < testing.size(); i++)
         {
@@ -61,11 +54,10 @@ public class TabularDataController implements Serializable
 //        generate.shiftArray(date);
         FacesContext.getCurrentInstance().getExternalContext().getRequestMap().put("weatherData", dataTest);
            
-=======
         List<WeatherData> data = new ArrayList<WeatherData>();
         WeatherDataService dao = new WeatherDataService();
         
-        data = dao.findByLocation("Frisco");
+        data = dao.findByLocation("Dallas");
 
         WeatherData newData = new WeatherData();
         newData.setData(data);
@@ -73,7 +65,6 @@ public class TabularDataController implements Serializable
         
         FacesContext.getCurrentInstance().getExternalContext().getRequestMap().put("weatherData", newData);
 	        
->>>>>>> LoggingService
 		return "tabularData.xhtml";
 	}	
 }
