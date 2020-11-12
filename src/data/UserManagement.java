@@ -26,4 +26,9 @@ public class UserManagement
 	{
 		this.user = user;
 	}
+	
+	public void logOutUser()
+	{
+		this.user = null;
+	}
 }

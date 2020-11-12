@@ -10,7 +10,6 @@ import javax.ws.rs.core.MediaType;
 
 import beans.WeatherData;
 import beans.WeatherResponseDataModel;
-import data.WeatherDataService;
 import util.FactoryDTO;
 import util.FactoryService;
 import util.FactoryService.DTOType;
