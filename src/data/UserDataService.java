@@ -149,7 +149,7 @@ public class UserDataService implements UserDataInterface<User>
 	
 	@Override
 	public boolean create(User user) {
-		boolean found = false;
+		boolean created = false;
 		
 		System.out.println("Firstname: " + user.getFirstName() + " Lastname: " + user.getLastName() + " Email: " + user.getEmail()+ " Gender: " + user.getGender()+ " Age: " + user.getAge()+ " State: " + user.getState()+ " Username: " + user.getUsername()+ " Password: " + user.getPassword());
 		try
@@ -172,14 +172,14 @@ public class UserDataService implements UserDataInterface<User>
 			
 			myConn.close();
 			
-			found = true;
+			created = true;
 		}
 		catch(Exception e)
 		{
 			e.printStackTrace();
 			//throw new DatabaseException();
 		}
-		return found;
+		return created;
 	}
 	
 	@Override

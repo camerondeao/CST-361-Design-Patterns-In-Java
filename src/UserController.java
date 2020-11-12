@@ -1,4 +1,3 @@
-
 import java.io.Serializable;
 import java.sql.SQLException;
 import java.text.SimpleDateFormat;
@@ -8,15 +7,8 @@ import java.util.List;
 import java.util.Objects;
 
 import javax.ejb.EJB;
-import javax.ejb.Local;
-import javax.ejb.LocalBean;
-import javax.ejb.Stateless;
-import javax.faces.bean.ManagedBean;
-
-//import javax.faces.bean.ViewScoped;
 import javax.faces.view.ViewScoped;
 import javax.faces.context.FacesContext;
-import javax.inject.Inject;
 import javax.interceptor.Interceptors;
 
 import beans.User;
@@ -24,30 +16,19 @@ import beans.WeatherData;
 import business.GenerateWeatherData;
 import business.GenerateWeatherInterface;
 import business.LoggingInterceptor;
-import business.UserBusinessService;
-import business.UserServiceInterface;
 import data.UserDataInterface;
-import data.UserDataService;
 import data.UserManagement;
 import data.WeatherDataAccessInterface;
 import data.WeatherDataService;
 import util.ApplicationLogger;
 import javax.inject.Named;
 
-//@ManagedBean
-//@ViewScoped
-//@Stateless
-//@Local(UserController.class)
-//@LocalBean
 @Named
 @ViewScoped
 @Interceptors(LoggingInterceptor.class)
 public class UserController implements Serializable
 {
 	private static final long serialVersionUID = 1L;
-	
-	@EJB
-	UserServiceInterface UserBS;
 	
 	@EJB
 	GenerateWeatherInterface generate;
@@ -94,13 +75,16 @@ public class UserController implements Serializable
 	{
 		try 
 		{
-
-			UserBS.register(user);
-
-			UserBusinessService UserBS = new UserBusinessService();
-			userDAO.create(user);
-
-			
+			if(userDAO.create(user))
+			{
+				FacesContext.getCurrentInstance().getExternalContext().getRequestMap().put("user", user);
+				return "registerResponse.xhtml";
+			}
+			else
+			{
+				//CHANGE THIS TO THE APPROPRIATE REDIRECT PAGE!
+				return "loginFail.xhtml";
+			}
 		}
 		catch(Exception e)
 		{
@@ -108,32 +92,34 @@ public class UserController implements Serializable
 			e.printStackTrace();
 		}
 		
-		FacesContext.getCurrentInstance().getExternalContext().getRequestMap().put("user", user);
-		
-		return "registerResponse.xhtml";
+		return "loginFail.xhtml";
 	}
 	
-	public String onLogoff() {
-		//redirect to protected page to get login page
+	public String onLogoff() 
+	{
+		
+		UserManagement.getInstance().logOutUser();
+		//Change this redirect to the appropriate page after logging out.
 		return "homePage.xhtml?faces-redirect=true";
 	}
 	
 	private void checkWeatherData()
 	{		
 		WeatherDataService dao = new WeatherDataService();
-		GenerateWeatherData generate = new GenerateWeatherData();
+		GenerateWeatherData generate = new GenerateWeatherData();	
+		String location = UserManagement.getInstance().getUser().getState();
 		
-		if(weatherDAO.checkData("Dallas"))
+		if(weatherDAO.checkData(location))
 		{
 			List<WeatherData> retrievedData = new ArrayList<WeatherData>();
 			String day = getDay();
 			
-			retrievedData = dao.findByLocation("Dallas");
+			retrievedData = dao.findByLocation(location);
 			
 			if(!Objects.equals(retrievedData.get(0), day))
 			{
 				WeatherData data = new WeatherData();
-				data.setLocation("Dallas");
+				data.setLocation(location);
 				data.setData(generate.shiftData(day, retrievedData));
 				weatherDAO.update(data);
 			}

@@ -1,6 +1,5 @@
 package business;
 
-import javax.ejb.EJB;
 import javax.enterprise.context.RequestScoped;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
@@ -11,8 +10,6 @@ import javax.ws.rs.core.MediaType;
 
 import beans.User;
 import beans.UserResponseDataModel;
-import data.UserDataInterface;
-import data.UserDataService;
 import util.FactoryDTO;
 import util.FactoryService;
 import util.FactoryService.DTOType;

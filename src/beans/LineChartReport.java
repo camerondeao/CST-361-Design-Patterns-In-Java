@@ -6,13 +6,10 @@ import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
-
 import org.primefaces.model.chart.LineChartModel;
 import org.primefaces.model.chart.LineChartSeries;
-
-import business.GenerateWeatherData;
+import data.UserManagement;
 import data.WeatherDataService;
-
 import org.primefaces.model.chart.Axis;
 import org.primefaces.model.chart.AxisType;
 import org.primefaces.model.chart.CategoryAxis;
@@ -27,16 +24,10 @@ public class LineChartReport
 	
 	@PostConstruct
 	public void init()
-	{
-//		GenerateWeatherData generate = new GenerateWeatherData();
-//		for(int i = 0; i < 7; i++)
-//		{
-//			data = generate.generateData(data);
-//		}
-//		generate.setDays(data);
-		
+	{	
+		String location = UserManagement.getInstance().getUser().getState();
 		WeatherDataService dao = new WeatherDataService();
-		data = dao.findByLocation("Dallas");
+		data = dao.findByLocation(location);
 		
 		lineModel = new LineChartModel();
 		createTemperatureSeries();

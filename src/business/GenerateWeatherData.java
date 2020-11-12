@@ -9,8 +9,7 @@ import javax.ejb.Local;
 import javax.ejb.LocalBean;
 import javax.ejb.Stateless;
 import javax.interceptor.Interceptors;
-import business.LoggingInterceptor;
-
+import data.UserManagement;
 import beans.WeatherData;
 
 @Stateless
@@ -28,8 +27,9 @@ public class GenerateWeatherData implements GenerateWeatherInterface
 	@Interceptors(LoggingInterceptor.class)
 	public List<WeatherData> generateData(List<WeatherData> data) 
 	{	
+		String location = UserManagement.getInstance().getUser().getState();
 		WeatherData newData = new WeatherData();
-		newData.setLocation("Dallas");
+		newData.setLocation(location);
 		newData.setTemperature(getRandomTemperature());
 		newData.setHumidity(getRandomHumidity());
 		newData.setWindSpeed(getRandomWindSpeed());
@@ -164,12 +164,12 @@ public class GenerateWeatherData implements GenerateWeatherInterface
 		}
 		
 		
-		System.out.println("FINAL DATA LIST: ");
-		for(int i = 0; i < weatherData.size(); i++)
-		{
-			System.out.println("Location: " + weatherData.get(i).getLocation() + " - Description: " + weatherData.get(i).getDescription() + " - Temperature: " + weatherData.get(i).getTemperature()
-			          + " - Humidity: " + weatherData.get(i).getHumidity() + " - Wind Speed: " + weatherData.get(i).getWindSpeed() + " - Weekday: " + weatherData.get(i).getDay());
-		}
+//		System.out.println("FINAL DATA LIST: ");
+//		for(int i = 0; i < weatherData.size(); i++)
+//		{
+//			System.out.println("Location: " + weatherData.get(i).getLocation() + " - Description: " + weatherData.get(i).getDescription() + " - Temperature: " + weatherData.get(i).getTemperature()
+//			          + " - Humidity: " + weatherData.get(i).getHumidity() + " - Wind Speed: " + weatherData.get(i).getWindSpeed() + " - Weekday: " + weatherData.get(i).getDay());
+//		}
 		return weatherData;
 	}
 }
