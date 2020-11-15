@@ -56,6 +56,7 @@ public class UserController implements Serializable
 		{
 			if(userDAO.find(user)) 
 			{
+				//Commit message
 				checkWeatherData();
 				List<WeatherData> data = new ArrayList<WeatherData>();
 		        WeatherDataService dao = new WeatherDataService();
