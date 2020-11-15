@@ -21,6 +21,8 @@ import data.UserManagement;
 import data.WeatherDataAccessInterface;
 import data.WeatherDataService;
 import util.ApplicationLogger;
+import util.UserNotFoundException;
+
 import javax.inject.Named;
 
 @Named
@@ -55,6 +57,34 @@ public class UserController implements Serializable
 			if(userDAO.find(user)) 
 			{
 				checkWeatherData();
+				List<WeatherData> data = new ArrayList<WeatherData>();
+		        WeatherDataService dao = new WeatherDataService();
+		        
+				String location = UserManagement.getInstance().getUser().getState();
+
+				String temp = getDay();
+				
+				System.out.println(temp);
+
+				data = dao.findByLocation(location);
+
+		        WeatherData newData = new WeatherData();
+		        for(int i = 0; i < data.size(); i++) {
+					if(data.get(i).getDay().equals(temp)) {
+						newData = data.get(i);
+						System.out.println("data found");
+					}
+				}
+		        
+		        newData = data.get(1);
+		        
+//		        newData.setData(data);
+//		        newData.setLocation(data.get(0).getLocation());
+		        if(newData == null) {
+		        	System.out.println("null");
+		        }
+		        System.out.println(newData.getLocation() + newData.getTemperature());
+		        FacesContext.getCurrentInstance().getExternalContext().getRequestMap().put("weatherData", newData);
 				FacesContext.getCurrentInstance().getExternalContext().getRequestMap().put("user", user);
 				return "homePage.xhtml";
 			}
@@ -82,8 +112,7 @@ public class UserController implements Serializable
 			}
 			else
 			{
-				//CHANGE THIS TO THE APPROPRIATE REDIRECT PAGE!
-				return "loginFail.xhtml";
+				return "registerFail.xhtml";
 			}
 		}
 		catch(Exception e)
@@ -91,16 +120,14 @@ public class UserController implements Serializable
 			System.out.println("Exception: occurred");
 			e.printStackTrace();
 		}
-		
-		return "loginFail.xhtml";
+		return "registerFail.xhtml";
 	}
 	
 	public String onLogoff() 
 	{
-		
 		UserManagement.getInstance().logOutUser();
 		//Change this redirect to the appropriate page after logging out.
-		return "homePage.xhtml?faces-redirect=true";
+		return "loginForm.xhtml?faces-redirect=true";
 	}
 	
 	private void checkWeatherData()
@@ -116,13 +143,13 @@ public class UserController implements Serializable
 			
 			retrievedData = dao.findByLocation(location);
 			
-			if(!Objects.equals(retrievedData.get(0), day))
-			{
-				WeatherData data = new WeatherData();
-				data.setLocation(location);
-				data.setData(generate.shiftData(day, retrievedData));
-				weatherDAO.update(data);
-			}
+//			if(!Objects.equals(retrievedData.get(0), day))
+//			{
+//				WeatherData data = new WeatherData();
+//				data.setLocation(location);
+//				data.setData(generate.shiftData(day, retrievedData));
+//				weatherDAO.update(data);
+//			}
 		}
 		else
 		{
