@@ -63,27 +63,22 @@ public class UserController implements Serializable
 				String location = UserManagement.getInstance().getUser().getState();
 
 				String temp = getDay();
+				int index = 0;
 				
-				System.out.println(temp);
 
 				data = dao.findByLocation(location);
 
 		        WeatherData newData = new WeatherData();
-		        for(int i = 0; i < data.size(); i++) {
-					if(data.get(i).getDay().equals(temp)) {
-						newData = data.get(i);
-						System.out.println("data found");
+		        for(int i = 0; i < data.size(); i++) 
+		        {
+					if(data.get(i).getDay().equals(temp)) 
+					{
+						index = i;
 					}
 				}
-		        
-		        newData = data.get(1);
-		        
-//		        newData.setData(data);
-//		        newData.setLocation(data.get(0).getLocation());
-		        if(newData == null) {
-		        	System.out.println("null");
-		        }
-		        System.out.println(newData.getLocation() + newData.getTemperature());
+		       
+		        newData = data.get(index);		        
+
 		        FacesContext.getCurrentInstance().getExternalContext().getRequestMap().put("weatherData", newData);
 				FacesContext.getCurrentInstance().getExternalContext().getRequestMap().put("user", user);
 				return "homePage.xhtml";
@@ -126,7 +121,6 @@ public class UserController implements Serializable
 	public String onLogoff() 
 	{
 		UserManagement.getInstance().logOutUser();
-		//Change this redirect to the appropriate page after logging out.
 		return "loginForm.xhtml?faces-redirect=true";
 	}
 	

@@ -20,9 +20,9 @@ public class WeatherDataService implements WeatherDataAccessInterface<WeatherDat
 {
 
 	Connection myConn = null;
-	String connURL = "jdbc:mysql://localhost:3307/sys";
+	String connURL = "jdbc:mysql://localhost:3306/sys";
 	String username = "root";
-	String password = "root";
+	String password = "connection";
 	
 	@Override
 	public List<WeatherData> findAll() 

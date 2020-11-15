@@ -21,9 +21,9 @@ import java.sql.*;
 public class UserDataService implements UserDataInterface<User>
 {
 	Connection myConn = null;
-	String connURL = "jdbc:mysql://localhost:3307/sys";
+	String connURL = "jdbc:mysql://localhost:3306/sys";
 	String username = "root";
-	String password = "root";
+	String password = "connection";
 	
 	public UserDataService() 
     {
@@ -36,7 +36,7 @@ public class UserDataService implements UserDataInterface<User>
 		try
 		{
 			myConn = DriverManager.getConnection(connURL, username, password);
-			String sqlStatement = "SELECT * FROM users";
+			String sqlStatement = "SELECT * FROM users2";
 			Statement state = myConn.createStatement();
 			ResultSet rs = state.executeQuery(sqlStatement);
 			
@@ -74,7 +74,7 @@ public class UserDataService implements UserDataInterface<User>
 		try 
 		{
 			myConn = DriverManager.getConnection(connURL, username, password);
-			String query = "SELECT * FROM users WHERE USERID = ?";
+			String query = "SELECT * FROM users2 WHERE USERID = ?";
 			PreparedStatement statement = myConn.prepareStatement(query);
 			
 			statement.setInt(1, id);
@@ -112,7 +112,7 @@ public class UserDataService implements UserDataInterface<User>
 		try 
 		{
 			myConn = DriverManager.getConnection(connURL, username, password);
-			String query = " SELECT * FROM users WHERE USERNAME = ? " ;
+			String query = " SELECT * FROM users2 WHERE USERNAME = ? " ;
 			
 			PreparedStatement statement = myConn.prepareStatement(query);
 			
@@ -156,7 +156,7 @@ public class UserDataService implements UserDataInterface<User>
 		try
 		{
 			myConn = DriverManager.getConnection(connURL, username, password);
-			String createQuery = "INSERT INTO users (FIRSTNAME,LASTNAME,EMAILADDRESS,GENDER,AGE,STATE,USERNAME,PASSWORD) VALUES (?,?,?,?,?,?,?,?)";
+			String createQuery = "INSERT INTO users2 (FIRSTNAME,LASTNAME,EMAILADDRESS,GENDER,AGE,STATE,USERNAME,PASSWORD) VALUES (?,?,?,?,?,?,?,?)";
 			
 			PreparedStatement p = myConn.prepareStatement(createQuery);
 			
@@ -204,7 +204,7 @@ public class UserDataService implements UserDataInterface<User>
 		try 
 		{
 			myConn = DriverManager.getConnection(connURL, username, password);
-			String query = " SELECT * FROM users WHERE USERNAME = ? AND PASSWORD = ?";
+			String query = " SELECT * FROM users2 WHERE USERNAME = ? AND PASSWORD = ?";
 			
 			PreparedStatement statement = myConn.prepareStatement(query);
 			
@@ -243,7 +243,6 @@ public class UserDataService implements UserDataInterface<User>
 			throw new DatabaseException();
 		}
 
-		System.out.println("HERE IS THE USER: " + found);
 		return found;
 	}
 }

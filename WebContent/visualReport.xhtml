@@ -1,14 +1,15 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
+      
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:ui="http://java.sun.com/jsf/facelets"
       xmlns:f="http://java.sun.com/jsf/core"
       xmlns:h="http://java.sun.com/jsf/html"
-      xmlns:p="http://primefaces.org/ui"
-      xmlns:pt="http://xmlns.jcp.org/jsf/passthrough">
+      xmlns:p="http://primefaces.org/ui">
+      
       
          <ui:composition template="/layouts/commonLayout.xhtml">
 	<ui:define name="content">
-	
 <h:head>
 	<title>Weather Tracker | Visual Report</title>
 </h:head> 
@@ -17,7 +18,6 @@
 	<div class="login-page">
 		<div class="form">
 			<div class="login-form" style="margin:-10px;">
-				<!-- VISUAL REPORT -->
 				<h1>Visual Report</h1>
 		    	<p:chart type="line" model="#{lineChartReport.lineModel}" style="height:320px;width:500px; align:center;"/>
 	    </div>
@@ -26,5 +26,4 @@
 </body> 
 </ui:define>
 </ui:composition>
-
 </html>
