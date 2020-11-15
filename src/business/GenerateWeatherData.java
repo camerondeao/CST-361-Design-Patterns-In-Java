@@ -95,6 +95,7 @@ public class GenerateWeatherData implements GenerateWeatherInterface
 		if(data.getHumidity() <= 40)
 		{
 			temp = temp + ", Dry";
+			data.setDescription(temp);
 		}
 		else
 		{

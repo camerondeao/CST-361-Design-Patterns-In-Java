@@ -10,6 +10,7 @@ import javax.interceptor.Interceptors;
 
 import beans.User;
 import business.LoggingInterceptor;
+import util.DatabaseException;
 
 import java.sql.*;
 
@@ -20,9 +21,13 @@ import java.sql.*;
 public class UserDataService implements UserDataInterface<User>
 {
 	Connection myConn = null;
-	String connURL = "jdbc:mysql://localhost:3306/sys";
+	String connURL = "jdbc:mysql://localhost:3307/sys";
 	String username = "root";
-	String password = "connection";
+	String password = "root";
+	
+	public UserDataService() 
+    {
+    }
 	
 	@Override
 	public List<User> findAll() {
@@ -31,7 +36,7 @@ public class UserDataService implements UserDataInterface<User>
 		try
 		{
 			myConn = DriverManager.getConnection(connURL, username, password);
-			String sqlStatement = "SELECT * FROM users2";
+			String sqlStatement = "SELECT * FROM users";
 			Statement state = myConn.createStatement();
 			ResultSet rs = state.executeQuery(sqlStatement);
 			
@@ -57,11 +62,7 @@ public class UserDataService implements UserDataInterface<User>
 		catch(Exception e)
 		{
 			e.printStackTrace();
-			
-		}
-		finally
-		{
-			
+			throw new DatabaseException();
 		}
 		return dbUsers;
 	}
@@ -73,7 +74,7 @@ public class UserDataService implements UserDataInterface<User>
 		try 
 		{
 			myConn = DriverManager.getConnection(connURL, username, password);
-			String query = "SELECT * FROM users2 WHERE USERID = ?";
+			String query = "SELECT * FROM users WHERE USERID = ?";
 			PreparedStatement statement = myConn.prepareStatement(query);
 			
 			statement.setInt(1, id);
@@ -100,7 +101,7 @@ public class UserDataService implements UserDataInterface<User>
 		catch (SQLException e) 
 		{
 			e.printStackTrace();
-			
+			throw new DatabaseException();
 		}
 		return foundUser;
 	}
@@ -111,7 +112,7 @@ public class UserDataService implements UserDataInterface<User>
 		try 
 		{
 			myConn = DriverManager.getConnection(connURL, username, password);
-			String query = " SELECT * FROM users2 WHERE USERNAME = ? " ;
+			String query = " SELECT * FROM users WHERE USERNAME = ? " ;
 			
 			PreparedStatement statement = myConn.prepareStatement(query);
 			
@@ -141,7 +142,7 @@ public class UserDataService implements UserDataInterface<User>
 		catch (SQLException e) 
 		{
 			e.printStackTrace();
-			//throw new DatabaseException();
+			throw new DatabaseException();
 		}
 		
 		return user;
@@ -155,7 +156,7 @@ public class UserDataService implements UserDataInterface<User>
 		try
 		{
 			myConn = DriverManager.getConnection(connURL, username, password);
-			String createQuery = "INSERT INTO users2 (FIRSTNAME,LASTNAME,EMAILADDRESS,GENDER,AGE,STATE,USERNAME,PASSWORD) VALUES (?,?,?,?,?,?,?,?)";
+			String createQuery = "INSERT INTO users (FIRSTNAME,LASTNAME,EMAILADDRESS,GENDER,AGE,STATE,USERNAME,PASSWORD) VALUES (?,?,?,?,?,?,?,?)";
 			
 			PreparedStatement p = myConn.prepareStatement(createQuery);
 			
@@ -174,10 +175,10 @@ public class UserDataService implements UserDataInterface<User>
 			
 			created = true;
 		}
-		catch(Exception e)
+		catch(SQLException e)
 		{
 			e.printStackTrace();
-			//throw new DatabaseException();
+			throw new DatabaseException();
 		}
 		return created;
 	}
@@ -203,11 +204,12 @@ public class UserDataService implements UserDataInterface<User>
 		try 
 		{
 			myConn = DriverManager.getConnection(connURL, username, password);
-			String query = " SELECT * FROM users2 WHERE USERNAME = ? ";
+			String query = " SELECT * FROM users WHERE USERNAME = ? AND PASSWORD = ?";
 			
 			PreparedStatement statement = myConn.prepareStatement(query);
 			
 			statement.setString(1, user.getUsername());
+			statement.setString(2, user.getPassword());
 			
 			ResultSet rs = statement.executeQuery();
 			
@@ -238,7 +240,9 @@ public class UserDataService implements UserDataInterface<User>
 		catch (SQLException e) 
 		{
 			e.printStackTrace();
+			throw new DatabaseException();
 		}
+
 		System.out.println("HERE IS THE USER: " + found);
 		return found;
 	}

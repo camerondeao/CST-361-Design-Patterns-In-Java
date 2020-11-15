@@ -24,7 +24,7 @@ public class LineChartReport
 	
 	@PostConstruct
 	public void init()
-	{	
+	{
 		String location = UserManagement.getInstance().getUser().getState();
 		WeatherDataService dao = new WeatherDataService();
 		data = dao.findByLocation(location);

@@ -10,17 +10,33 @@
 	<!-- Application Title -->
 
 	<div class="container">
-    <h1 class="logo"><a href="homePage.xhtml">Weather Tracker</a></h1>
+    <ui:fragment rendered="#{empty user.username}"><h1 class="logo"><a href="#">Weather Tracker</a></h1></ui:fragment>
+    <ui:fragment rendered="#{not empty user.username}"><h1 class="logo"><a href="homePage.xhtml">Weather Tracker</a></h1></ui:fragment>
+    
     <nav>
+    <ul class="navigation">
+     <ui:fragment rendered="#{empty user.username and empty weatherData.data}">
+    	<li><a href="loginForm.xhtml">Login</a></li>
+        <li><a href="registerForm.xhtml">Sign Up</a></li>
+        </ui:fragment>
+    </ul>
       <ul class="navigation">
-      	<li><a href="visualReport.xhtml">Visual Report</a></li>
+      	<li>
+      	<h:form rendered="#{not empty weatherData.data or not empty user.username}">
+      	<h:link value="Visual Report" outcome="visualReport.xhtml" />
+		</h:form>
+      	</li>
+
         <li>
-        	<h:form>
+        	<h:form rendered="#{not empty weatherData.data or not empty user.username}">
 				<h:commandLink value="Tabular Data" action="#{tabularDataController.onSubmit()}"></h:commandLink>
 			</h:form>
 		</li>
-		<li><a href="loginForm.xhtml">Login</a></li>
-        <li><a href="registerForm.xhtml">Sign Up</a></li>
+		<li>
+			<h:form rendered="#{not empty weatherData.data or not empty user.username}">
+				<h:commandLink value="Logout" action="#{userController.onLogoff()}"></h:commandLink>
+			</h:form>
+		</li>
       </ul>
     </nav>
   </div>

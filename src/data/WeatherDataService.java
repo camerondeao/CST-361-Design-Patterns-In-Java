@@ -10,6 +10,7 @@ import java.util.ArrayList;
 import java.sql.*;
 import beans.WeatherData;
 import business.LoggingInterceptor;
+import util.DatabaseException;
 
 @Stateless
 @Local(WeatherDataAccessInterface.class)
@@ -19,9 +20,9 @@ public class WeatherDataService implements WeatherDataAccessInterface<WeatherDat
 {
 
 	Connection myConn = null;
-	String connURL = "jdbc:mysql://localhost:3306/sys";
+	String connURL = "jdbc:mysql://localhost:3307/sys";
 	String username = "root";
-	String password = "connection";
+	String password = "root";
 	
 	@Override
 	public List<WeatherData> findAll() 
@@ -68,6 +69,7 @@ public class WeatherDataService implements WeatherDataAccessInterface<WeatherDat
 		catch (SQLException e) 
 		{
 			e.printStackTrace();
+			throw new DatabaseException();
 		}
 		return t;
 	}
@@ -116,6 +118,7 @@ public class WeatherDataService implements WeatherDataAccessInterface<WeatherDat
 		catch (SQLException e)
 		{
 			e.printStackTrace();
+			throw new DatabaseException();
 		}
 		return false;
 	}
@@ -167,6 +170,7 @@ public class WeatherDataService implements WeatherDataAccessInterface<WeatherDat
 		catch (SQLException e)
 		{
 			e.printStackTrace();
+			throw new DatabaseException();
 		}
 		return dayData;
 	}
@@ -194,6 +198,7 @@ public class WeatherDataService implements WeatherDataAccessInterface<WeatherDat
 		catch(SQLException e)
 		{
 			e.printStackTrace();
+			throw new DatabaseException();
 		}
 		return false;
 	}

@@ -6,7 +6,10 @@ import javax.faces.view.ViewScoped;
 import javax.faces.context.FacesContext;
 import javax.inject.Named;
 import javax.interceptor.Interceptors;
+
+import beans.User;
 import beans.WeatherData;
+import data.UserDataInterface;
 import data.UserManagement;
 import data.WeatherDataAccessInterface;
 import business.LoggingInterceptor;
@@ -25,6 +28,7 @@ public class TabularDataController implements Serializable
 
 	public String onSubmit()
 	{
+
 		String location = UserManagement.getInstance().getUser().getState();
         List<WeatherData> testing = new ArrayList<WeatherData>();
         
@@ -46,7 +50,6 @@ public class TabularDataController implements Serializable
         newData.setLocation(data.get(0).getLocation());
         
         FacesContext.getCurrentInstance().getExternalContext().getRequestMap().put("weatherData", newData);
-	        
 		return "tabularData.xhtml";
 	}	
 }

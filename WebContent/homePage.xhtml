@@ -16,47 +16,35 @@
 <div class="login-page">
 	<div class="form">
 		<div class="login-form">
-				<h1  style="text-align:left">Arizona <span style="float:right;font-size:18px;margin-top:5px">#{weatherData.day}</span></h1>
+				<h1  style="text-align:left">#{weatherData.location}<span style="float:right;font-size:18px;margin-top:5px">#{weatherData.day}</span></h1>
 				<div class="line"></div>
-				<p style="text-align: center;margin-top:65px; font-size:85px"><i class="fas fa-cloud" style="margin-right:10px"></i>66°</p>
-				<p style="text-align: center;margin-top:5px; font-size:45px">Cloudy</p>
+				<c:choose>
+				    <c:when test="#{weatherData.description == 'Sunny' or weatherData.description == 'Sunny, Breezy' or weatherData.description == 'Sunny, Windy' or weatherData.description == 'Sunny, Dry'}">
+				        <p style="text-align: center;margin-top:65px; font-size:85px"><i class="fas fa-sun" style="margin-right:10px"></i>#{weatherData.temperature}°</p>
+				    </c:when>
+				    <c:when test="#{weatherData.description == 'Overcast' or weatherData.description == 'Overcast, Breezy' or weatherData.description == 'Overcast, Windy' or weatherData.description == 'Overcast, Dry'}">
+				        <p style="text-align: center;margin-top:65px; font-size:85px"><i class="fas fa-cloud-sun" style="margin-right:10px"></i>#{weatherData.temperature}°</p>
+				    </c:when>
+					<c:when test="#{weatherData.description == 'Cloudy' or weatherData.description == 'Cloudy, Breezy' or weatherData.description == 'Cloudy, Windy' or weatherData.description == 'Cloudy, Dry'}">
+				        <p style="text-align: center;margin-top:65px; font-size:85px"><i class="fas fa-cloud" style="margin-right:10px"></i>#{weatherData.temperature}°</p>
+				    </c:when>
+				    <c:when test="#{weatherData.description == 'Rainy' or weatherData.description == 'Rainy, Breezy' or weatherData.description == 'Rainy, Windy' or weatherData.description == 'Rainy, Dry'}">
+				        <p style="text-align: center;margin-top:65px; font-size:85px"><i class="fas fa-cloud-rain" style="margin-right:10px"></i>#{weatherData.temperature}°</p>
+				    </c:when>
+				    <c:when test="#{weatherData.description == 'Foggy' or weatherData.description == 'Foggy, Breezy' or weatherData.description == 'Foggy, Windy' or weatherData.description == 'Foggy, Dry'}">
+				        <p style="text-align: center;margin-top:65px; font-size:85px"><i class="fas fa-smog" style="margin-right:10px"></i>#{weatherData.temperature}°</p>
+				    </c:when>
+				</c:choose>
+				
+				
+				<p style="text-align: center;margin-top:5px; font-size:45px">#{weatherData.description}</p>
 				<div id="box">
-				<p style="float: left; margin: 20px 10px 0px 10px;font-size:15px">Wind <strong>SE 5 mph</strong></p>
+				<p style="float: left; margin: 20px 10px 0px 10px;font-size:15px">Wind <strong>#{weatherData.windSpeed} mph</strong></p>
 				</div>
 				<div id="box">
-				<p style="float: right; margin: 20px 10px 0px 10px;font-size:15px">Humidity <strong>88%</strong></p>
+				<p style="float: right; margin: 20px 10px 0px 10px;font-size:15px">Humidity <strong>#{weatherData.humidity}%</strong></p>
 				</div>
 		</div>
-	</div>
-	<div class="form" style="margin-top:-85px">
-		<!-- WeatherData -->
-		<!-- weekday -->
-		<h:dataTable value="#{weatherData.data}" var="data" style="text-align:center">
-				<h:column>
-					<f:facet name="header">Wednesday</f:facet>
-					
-				</h:column>
-				<h:column>
-					<f:facet name="header">Thursday</f:facet>
-
-				</h:column>
-				<h:column>
-					<f:facet name="header">Friday</f:facet>
-					
-				</h:column>
-				<h:column>
-					<f:facet name="header">Saturday</f:facet>
-					
-				</h:column>
-				<h:column>
-					<f:facet name="header">Sunday</f:facet>
-					
-				</h:column>
-				<h:column>
-					<f:facet name="header">Monday</f:facet>
-					
-				</h:column>
-		</h:dataTable>
 	</div>
 </div> 
 </body> 
