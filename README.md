@@ -2,7 +2,7 @@ Program Title: Weather Tracker
 --------------------------------
 Program Version: 1.0 - 11/15/2020
 
-Developers: David Cho, Cameron Deao, Jessica Padilla, Emily Quevedo
+Developers: David Cho, Cameron Deao, Emily Quevedo
 
 Grand Canyon University - CST-361
 
